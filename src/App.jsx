@@ -6,6 +6,7 @@ import Services from './components/webpage/Services';
 import Workshops from './components/webpage/Workshops';
 import SocialWork from './components/webpage/SocialWork';
 import Events from './components/webpage/Events';
+import ContactForm from './components/webpage/ContactForm';
 import LocationMap from './components/webpage/LocationMap';
 import Footer from './components/webpage/Footer';
 import WhatsAppButton from './components/webpage/WhatsAppButton';
@@ -20,6 +21,7 @@ function App() {
       <Workshops />
       <SocialWork />
       <Events />
+      <ContactForm />
       <LocationMap />
       <Footer />
       <WhatsAppButton />
