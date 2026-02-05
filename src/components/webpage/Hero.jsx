@@ -4,10 +4,10 @@ import { ArrowRight } from 'lucide-react';
 
 const Hero = () => {
     return (
-        <section id="home" className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-brand-50">
+        <section id="home" className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-brand-50 dark:bg-slate-950 transition-colors duration-300">
             {/* Background Shapes */}
-            <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-96 h-96 bg-brand-200 rounded-full blur-3xl opacity-50" />
-            <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-96 h-96 bg-teal-200 rounded-full blur-3xl opacity-50" />
+            <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-96 h-96 bg-brand-200 dark:bg-brand-900 rounded-full blur-3xl opacity-50 dark:opacity-20 transition-colors duration-300" />
+            <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-96 h-96 bg-teal-200 dark:bg-teal-900 rounded-full blur-3xl opacity-50 dark:opacity-20 transition-colors duration-300" />
 
             <div className="container mx-auto px-6 relative z-10">
                 <div className="max-w-3xl mx-auto text-center">
@@ -16,26 +16,26 @@ const Hero = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        <span className="inline-block py-1 px-3 rounded-full bg-brand-100 text-brand-700 text-sm font-semibold mb-6">
+                        <span className="inline-block py-1 px-3 rounded-full bg-brand-100 dark:bg-brand-900/50 text-brand-700 dark:text-brand-300 text-sm font-semibold mb-6 transition-colors duration-300">
                             Tu espacio de tranquilidad
                         </span>
-                        <h1 className="text-4xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">
-                            Encuentra el equilibrio en <span className="text-brand-600">MenteOasis</span>
+                        <h1 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white mb-6 leading-tight transition-colors duration-300">
+                            Encuentra el equilibrio en <span className="text-brand-600 dark:text-brand-400">MenteOasis</span>
                         </h1>
-                        <p className="text-lg text-slate-600 mb-10 leading-relaxed">
+                        <p className="text-lg text-slate-600 dark:text-slate-300 mb-10 leading-relaxed transition-colors duration-300">
                             Un enfoque profesional y humano para tu bienestar emocional.
                             Descubre nuestras terapias, talleres y recursos diseñados para ti.
                         </p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                             <a
                                 href="#services"
-                                className="px-8 py-4 bg-brand-600 text-white rounded-full font-semibold hover:bg-brand-700 transition w-full sm:w-auto flex items-center justify-center gap-2 shadow-lg shadow-brand-200"
+                                className="px-8 py-4 bg-brand-600 text-white rounded-full font-semibold hover:bg-brand-700 dark:hover:bg-brand-500 transition w-full sm:w-auto flex items-center justify-center gap-2 shadow-lg shadow-brand-200 dark:shadow-none"
                             >
                                 Ver Servicios <ArrowRight size={20} />
                             </a>
                             <a
                                 href="#contact"
-                                className="px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-full font-semibold hover:bg-slate-50 transition w-full sm:w-auto"
+                                className="px-8 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 rounded-full font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 transition w-full sm:w-auto"
                             >
                                 Contáctanos
                             </a>

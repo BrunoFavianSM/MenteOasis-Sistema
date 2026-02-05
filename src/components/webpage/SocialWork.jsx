@@ -48,9 +48,9 @@ const SocialWork = () => {
     const visibleActivities = expanded ? activities : activities.slice(0, 3);
 
     return (
-        <section id="social-work" className="py-24 bg-teal-950 text-white relative overflow-hidden">
+        <section id="social-work" className="py-24 bg-teal-950 dark:bg-slate-900 text-white relative overflow-hidden transition-colors duration-300">
             {/* Texture Overlay */}
-            <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#115e59_1px,transparent_1px)] [background-size:16px_16px]" />
+            <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#115e59_1px,transparent_1px)] dark:bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:16px_16px]" />
 
             <div className="container mx-auto px-6 relative z-10">
                 <div className="text-center max-w-3xl mx-auto mb-20">
@@ -59,14 +59,14 @@ const SocialWork = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-800/50 rounded-full text-teal-200 text-sm font-semibold mb-6 border border-teal-700 backdrop-blur-sm">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-800/50 dark:bg-slate-800/50 rounded-full text-teal-200 dark:text-brand-300 text-sm font-semibold mb-6 border border-teal-700 dark:border-slate-700 backdrop-blur-sm transition-colors duration-300">
                             <Star className="w-4 h-4 text-yellow-400" />
                             <span>Compromiso Social MenteOasis</span>
                         </div>
                         <h2 className="text-4xl md:text-5xl font-bold mb-6">
                             Responsabilidad Social
                         </h2>
-                        <p className="text-xl text-teal-100/90 leading-relaxed font-light">
+                        <p className="text-xl text-teal-100/90 dark:text-slate-300 leading-relaxed font-light transition-colors duration-300">
                             Más que una empresa, somos un agente de cambio. Nuestro área de Responsabilidad Social
                             se dedica al servicio directo, creando impacto tangible en la comunidad a través de
                             eventos, educación y asistencia humanitaria.
@@ -91,17 +91,17 @@ const SocialWork = () => {
                                     alt={activity.title}
                                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-teal-950 via-teal-950/40 to-transparent opacity-90 transition-opacity group-hover:opacity-80" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-teal-950 via-teal-950/40 to-transparent dark:from-slate-950 dark:via-slate-950/40 opacity-90 transition-opacity group-hover:opacity-80 transition-colors duration-300" />
 
                                 <div className="absolute bottom-0 left-0 p-8 w-full transform transition-transform duration-300 group-hover:-translate-y-2">
-                                    <div className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mb-4 text-white">
+                                    <div className="w-12 h-12 bg-white/10 dark:bg-slate-800/50 backdrop-blur-md rounded-2xl flex items-center justify-center mb-4 text-white transition-colors duration-300">
                                         {activity.icon}
                                     </div>
                                     <h3 className="text-2xl font-bold mb-3">{activity.title}</h3>
-                                    <p className="text-teal-100 text-sm leading-relaxed mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100 h-0 group-hover:h-auto overflow-hidden">
+                                    <p className="text-teal-100 dark:text-slate-300 text-sm leading-relaxed mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100 h-0 group-hover:h-auto overflow-hidden">
                                         {activity.description}
                                     </p>
-                                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-teal-300">
+                                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-teal-300 dark:text-brand-400 transition-colors duration-300">
                                         <Camera className="w-4 h-4" />
                                         Evidencia de Actividad
                                     </div>
@@ -114,7 +114,7 @@ const SocialWork = () => {
                 <div className="text-center">
                     <button
                         onClick={() => setExpanded(!expanded)}
-                        className="px-8 py-3 bg-teal-800 text-teal-100 border-2 border-teal-700 rounded-full font-bold hover:bg-teal-700 hover:border-teal-600 transition-all duration-300 shadow-lg"
+                        className="px-8 py-3 bg-teal-800 dark:bg-slate-800 text-teal-100 dark:text-slate-200 border-2 border-teal-700 dark:border-slate-700 rounded-full font-bold hover:bg-teal-700 dark:hover:bg-slate-700 hover:border-teal-600 dark:hover:border-slate-600 transition-all duration-300 shadow-lg"
                     >
                         {expanded ? "Ver Menos Actividades" : "Ver Más Evidencias"}
                     </button>

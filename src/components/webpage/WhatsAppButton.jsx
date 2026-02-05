@@ -8,9 +8,9 @@ const WhatsAppButton = () => {
         <div className="fixed bottom-6 right-6 z-50">
             {/* Tooltip */}
             {showTooltip && (
-                <div className="absolute bottom-full right-0 mb-2 px-4 py-2 bg-slate-900 text-white text-sm rounded-lg whitespace-nowrap shadow-lg animate-fade-in">
+                <div className="absolute bottom-full right-0 mb-2 px-4 py-2 bg-slate-900 dark:bg-slate-800 text-white text-sm rounded-lg whitespace-nowrap shadow-lg animate-fade-in transition-colors duration-300">
                     ¿Necesitas ayuda rápida?
-                    <div className="absolute bottom-0 right-6 transform translate-y-1/2 rotate-45 w-2 h-2 bg-slate-900" />
+                    <div className="absolute bottom-0 right-6 transform translate-y-1/2 rotate-45 w-2 h-2 bg-slate-900 dark:bg-slate-800 transition-colors duration-300" />
                 </div>
             )}
 

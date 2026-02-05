@@ -11,7 +11,7 @@ const Workshops = () => {
             description: "Aprende técnicas prácticas de relajación, respiración y mindfulness para recuperar el control y la calma en tu vida diaria.",
             date: "Disponible mensualmente",
             icon: <BrainCircuit className="w-8 h-8" />,
-            color: "bg-blue-100 text-blue-600",
+            color: "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400",
             image: "https://images.unsplash.com/photo-1544367563-12123d8965cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
             price: "S/. 30 / Sesión"
         },
@@ -20,7 +20,7 @@ const Workshops = () => {
             description: "Un espacio seguro para explorar tus emociones a través del color, la forma y la creatividad. No necesitas experiencia previa.",
             date: "Todos los Viernes",
             icon: <Palette className="w-8 h-8" />,
-            color: "bg-purple-100 text-purple-600",
+            color: "bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400",
             image: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
             price: "S/. 35 / Sesión"
         },
@@ -29,7 +29,7 @@ const Workshops = () => {
             description: "Analizamos obras literarias desde una perspectiva psicológica para entender la mente humana y enriquecer nuestro mundo interior.",
             date: "Primer sábado del mes",
             icon: <BookOpen className="w-8 h-8" />,
-            color: "bg-orange-100 text-orange-600",
+            color: "bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400",
             image: "https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
             price: "S/. 15 / Encuentro"
         },
@@ -39,7 +39,7 @@ const Workshops = () => {
             description: "Conecta con tus emociones a través del sonido y el ritmo. Una experiencia sensorial para liberar tensiones.",
             date: "Jueves por la tarde",
             icon: <Music className="w-8 h-8" />,
-            color: "bg-pink-100 text-pink-600",
+            color: "bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400",
             image: "https://images.unsplash.com/photo-1514119412050-ebd491a1e9a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
             price: "S/. 35 / Sesión"
         },
@@ -48,7 +48,7 @@ const Workshops = () => {
             description: "La risa como herramienta de sanación. Mejora tu estado de ánimo y reduce el estrés en un ambiente divertido.",
             date: "Último domingo del mes",
             icon: <Smile className="w-8 h-8" />,
-            color: "bg-yellow-100 text-yellow-600",
+            color: "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400",
             image: "https://images.unsplash.com/photo-1534180477871-5d6cc81f3920?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
             price: "S/. 25 / Sesión"
         },
@@ -57,7 +57,7 @@ const Workshops = () => {
             description: "Mejora tu comunicación, asertividad y relaciones interpersonales mediante dinámicas de grupo efectivas.",
             date: "Martes por la noche",
             icon: <Users className="w-8 h-8" />,
-            color: "bg-green-100 text-green-600",
+            color: "bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400",
             image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
             price: "S/. 40 / Sesión"
         }
@@ -66,10 +66,10 @@ const Workshops = () => {
     const visibleWorkshops = expanded ? workshops : workshops.slice(0, 3);
 
     return (
-        <section id="workshops" className="py-24 bg-gradient-to-b from-brand-50 to-white relative overflow-hidden">
+        <section id="workshops" className="py-24 bg-gradient-to-b from-brand-50 to-white dark:from-slate-950 dark:to-slate-900 relative overflow-hidden transition-colors duration-300">
             {/* Decorative Elements */}
-            <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[500px] h-[500px] bg-brand-200 rounded-full blur-[100px] opacity-30 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-indigo-200 rounded-full blur-[100px] opacity-30 pointer-events-none" />
+            <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[500px] h-[500px] bg-brand-200 dark:bg-brand-900/20 rounded-full blur-[100px] opacity-30 pointer-events-none transition-colors duration-300" />
+            <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-indigo-200 dark:bg-indigo-900/20 rounded-full blur-[100px] opacity-30 pointer-events-none transition-colors duration-300" />
 
             <div className="container mx-auto px-6 relative z-10">
                 <div className="text-center max-w-3xl mx-auto mb-16">
@@ -78,14 +78,14 @@ const Workshops = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-100 text-brand-700 rounded-full text-sm font-bold mb-4">
-                            <Star className="w-4 h-4 fill-brand-700" />
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-100 dark:bg-brand-900/50 text-brand-700 dark:text-brand-300 rounded-full text-sm font-bold mb-4 transition-colors duration-300">
+                            <Star className="w-4 h-4 fill-brand-700 dark:fill-brand-300" />
                             <span>Nuestros Programas Estelares</span>
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">
+                        <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6 tracking-tight transition-colors duration-300">
                             Talleres de Crecimiento Personal
                         </h2>
-                        <p className="text-lg text-slate-600 leading-relaxed">
+                        <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed transition-colors duration-300">
                             Potencia tu bienestar con nuestras experiencias grupales diseñadas por expertos.
                             Sumérgete en un ambiente de aprendizaje, apoyo y transformación.
                         </p>
@@ -101,7 +101,7 @@ const Workshops = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: 30 }}
                                 transition={{ duration: 0.3, delay: index * 0.1 }}
-                                className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col h-full border border-slate-100 group"
+                                className="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-xl dark:shadow-slate-900/50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col h-full border border-slate-100 dark:border-slate-800 group"
                             >
                                 <div className="relative h-48 overflow-hidden">
                                     <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors z-10" />
@@ -110,35 +110,35 @@ const Workshops = () => {
                                         alt={workshop.title}
                                         className="w-full h-full object-cover transform group-hover:scale-110 transition duration-700"
                                     />
-                                    <div className="absolute top-4 right-4 z-20 bg-white/90 backdrop-blur text-slate-800 text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+                                    <div className="absolute top-4 right-4 z-20 bg-white/90 dark:bg-slate-900/90 backdrop-blur text-slate-800 dark:text-slate-200 text-xs font-bold px-3 py-1 rounded-full shadow-sm">
                                         Inscripciones Abiertas
                                     </div>
                                 </div>
 
                                 <div className="p-8 flex-1 flex flex-col">
                                     <div className="flex items-start justify-between mb-4">
-                                        <div className={`p-3 rounded-2xl ${workshop.color}`}>
+                                        <div className={`p-3 rounded-2xl ${workshop.color} transition-colors duration-300`}>
                                             {workshop.icon}
                                         </div>
-                                        <span className="text-slate-900 font-bold bg-slate-50 px-3 py-1 rounded-lg">
+                                        <span className="text-slate-900 dark:text-white font-bold bg-slate-50 dark:bg-slate-800 px-3 py-1 rounded-lg transition-colors duration-300">
                                             {workshop.price}
                                         </span>
                                     </div>
 
-                                    <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-brand-600 transition-colors">
+                                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors duration-300">
                                         {workshop.title}
                                     </h3>
 
-                                    <p className="text-slate-600 mb-6 flex-1">
+                                    <p className="text-slate-600 dark:text-slate-300 mb-6 flex-1 transition-colors duration-300">
                                         {workshop.description}
                                     </p>
 
                                     <div className="space-y-4 mt-auto">
-                                        <div className="flex items-center gap-2 text-sm text-slate-500 font-medium">
-                                            <CalendarDays className="w-4 h-4 text-brand-500" />
+                                        <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 font-medium transition-colors duration-300">
+                                            <CalendarDays className="w-4 h-4 text-brand-500 dark:text-brand-400" />
                                             {workshop.date}
                                         </div>
-                                        <button className="w-full py-3 bg-slate-900 text-white rounded-xl font-bold hover:bg-brand-600 transition-colors shadow-lg shadow-slate-200">
+                                        <button className="w-full py-3 bg-slate-900 dark:bg-brand-600 text-white rounded-xl font-bold hover:bg-brand-600 dark:hover:bg-brand-500 transition-colors shadow-lg shadow-slate-200 dark:shadow-none">
                                             Reservar Cupo
                                         </button>
                                     </div>
@@ -151,15 +151,15 @@ const Workshops = () => {
                 <div className="text-center">
                     <button
                         onClick={() => setExpanded(!expanded)}
-                        className="px-8 py-3 bg-white text-brand-700 border-2 border-brand-100 rounded-full font-bold hover:bg-brand-50 hover:border-brand-200 transition-all duration-300 shadow-sm"
+                        className="px-8 py-3 bg-white dark:bg-slate-800 text-brand-700 dark:text-brand-300 border-2 border-brand-100 dark:border-slate-700 rounded-full font-bold hover:bg-brand-50 dark:hover:bg-slate-700 hover:border-brand-200 dark:hover:border-slate-600 transition-all duration-300 shadow-sm"
                     >
                         {expanded ? "Ver Menos Talleres" : "Explorar Todos los Talleres"}
                     </button>
                 </div>
 
                 <div className="mt-16 text-center">
-                    <p className="text-slate-500 mb-4">¿Buscas algo diferente?</p>
-                    <a href="#contact" className="inline-flex items-center text-brand-700 font-bold hover:underline gap-1 cursor-pointer">
+                    <p className="text-slate-500 dark:text-slate-400 mb-4 transition-colors duration-300">¿Buscas algo diferente?</p>
+                    <a href="#contact" className="inline-flex items-center text-brand-700 dark:text-brand-400 font-bold hover:underline gap-1 cursor-pointer transition-colors duration-300">
                         Consulta por talleres personalizados <span aria-hidden="true">&rarr;</span>
                     </a>
                 </div>

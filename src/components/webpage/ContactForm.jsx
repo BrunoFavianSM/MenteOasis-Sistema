@@ -41,7 +41,7 @@ const ContactForm = () => {
     }
 
     return (
-        <section id="contact" className="py-20 bg-gradient-to-b from-slate-50 to-white">
+        <section id="contact" className="py-20 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950 transition-colors duration-300">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-16">
                     <motion.div
@@ -49,13 +49,13 @@ const ContactForm = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <span className="inline-block py-1 px-3 rounded-full bg-brand-100 text-brand-700 text-sm font-semibold mb-4">
+                        <span className="inline-block py-1 px-3 rounded-full bg-brand-100 dark:bg-brand-900/50 text-brand-700 dark:text-brand-300 text-sm font-semibold mb-4 transition-colors duration-300">
                             Contáctanos
                         </span>
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4 transition-colors duration-300">
                             ¿Listo para dar el primer paso?
                         </h2>
-                        <p className="text-slate-600 max-w-2xl mx-auto">
+                        <p className="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto transition-colors duration-300">
                             Estamos aquí para escucharte. Completa el formulario y nos pondremos en contacto contigo pronto.
                         </p>
                     </motion.div>
@@ -67,15 +67,15 @@ const ContactForm = () => {
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="bg-white p-8 rounded-3xl shadow-xl border border-slate-100"
+                        className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-xl border border-slate-100 dark:border-slate-700 transition-colors duration-300"
                     >
                         {state.succeeded ? (
                             <div className="text-center py-12">
-                                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <CheckCircle className="w-8 h-8 text-green-600" />
+                                <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4 transition-colors duration-300">
+                                    <CheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
                                 </div>
-                                <h3 className="text-2xl font-bold text-slate-900 mb-2">¡Mensaje Enviado!</h3>
-                                <p className="text-slate-600">
+                                <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2 transition-colors duration-300">¡Mensaje Enviado!</h3>
+                                <p className="text-slate-600 dark:text-slate-300 transition-colors duration-300">
                                     Gracias por contactarnos. Te responderemos pronto.
                                 </p>
                             </div>
@@ -83,11 +83,11 @@ const ContactForm = () => {
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 {/* Name Field */}
                                 <div>
-                                    <label htmlFor="name" className="block text-sm font-semibold text-slate-700 mb-2">
+                                    <label htmlFor="name" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 transition-colors duration-300">
                                         Nombre Completo *
                                     </label>
                                     <div className="relative">
-                                        <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                                        <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 dark:text-slate-500 transition-colors duration-300" />
                                         <input
                                             id="name"
                                             type="text"
@@ -95,7 +95,7 @@ const ContactForm = () => {
                                             value={formData.name}
                                             onChange={handleChange}
                                             required
-                                            className="w-full pl-12 pr-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition"
+                                            className="w-full pl-12 pr-4 py-3 border border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400"
                                             placeholder="Tu nombre"
                                         />
                                     </div>
@@ -104,11 +104,11 @@ const ContactForm = () => {
 
                                 {/* Email Field */}
                                 <div>
-                                    <label htmlFor="email" className="block text-sm font-semibold text-slate-700 mb-2">
+                                    <label htmlFor="email" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 transition-colors duration-300">
                                         Correo Electrónico *
                                     </label>
                                     <div className="relative">
-                                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 dark:text-slate-500 transition-colors duration-300" />
                                         <input
                                             id="email"
                                             type="email"
@@ -116,7 +116,7 @@ const ContactForm = () => {
                                             value={formData.email}
                                             onChange={handleChange}
                                             required
-                                            className="w-full pl-12 pr-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition"
+                                            className="w-full pl-12 pr-4 py-3 border border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400"
                                             placeholder="tu@email.com"
                                         />
                                     </div>
@@ -125,18 +125,18 @@ const ContactForm = () => {
 
                                 {/* Phone Field */}
                                 <div>
-                                    <label htmlFor="phone" className="block text-sm font-semibold text-slate-700 mb-2">
+                                    <label htmlFor="phone" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 transition-colors duration-300">
                                         Teléfono
                                     </label>
                                     <div className="relative">
-                                        <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                                        <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 dark:text-slate-500 transition-colors duration-300" />
                                         <input
                                             id="phone"
                                             type="tel"
                                             name="phone"
                                             value={formData.phone}
                                             onChange={handleChange}
-                                            className="w-full pl-12 pr-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition"
+                                            className="w-full pl-12 pr-4 py-3 border border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400"
                                             placeholder="+51 999 999 999"
                                         />
                                     </div>
@@ -145,7 +145,7 @@ const ContactForm = () => {
 
                                 {/* Subject Field */}
                                 <div>
-                                    <label htmlFor="subject" className="block text-sm font-semibold text-slate-700 mb-2">
+                                    <label htmlFor="subject" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 transition-colors duration-300">
                                         Asunto *
                                     </label>
                                     <select
@@ -154,7 +154,7 @@ const ContactForm = () => {
                                         value={formData.subject}
                                         onChange={handleChange}
                                         required
-                                        className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition"
+                                        className="w-full px-4 py-3 border border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400"
                                     >
                                         <option value="">Selecciona un asunto</option>
                                         <option value="Terapia Individual">Terapia Individual</option>
@@ -169,11 +169,11 @@ const ContactForm = () => {
 
                                 {/* Message Field */}
                                 <div>
-                                    <label htmlFor="message" className="block text-sm font-semibold text-slate-700 mb-2">
+                                    <label htmlFor="message" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 transition-colors duration-300">
                                         Mensaje *
                                     </label>
                                     <div className="relative">
-                                        <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-slate-400" />
+                                        <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-slate-400 dark:text-slate-500 transition-colors duration-300" />
                                         <textarea
                                             id="message"
                                             name="message"
@@ -181,7 +181,7 @@ const ContactForm = () => {
                                             onChange={handleChange}
                                             required
                                             rows="5"
-                                            className="w-full pl-12 pr-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition resize-none"
+                                            className="w-full pl-12 pr-4 py-3 border border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition resize-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400"
                                             placeholder="Cuéntanos cómo podemos ayudarte..."
                                         />
                                     </div>
@@ -190,11 +190,11 @@ const ContactForm = () => {
 
                                 {/* Error Message */}
                                 {state.errors && state.errors.length > 0 && (
-                                    <div className="bg-red-50 border border-red-200 rounded-xl p-4 flex items-start gap-3">
-                                        <AlertCircle className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
+                                    <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4 flex items-start gap-3 transition-colors duration-300">
+                                        <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 mt-0.5 flex-shrink-0" />
                                         <div>
-                                            <p className="text-sm font-semibold text-red-800">Hubo un error al enviar el mensaje</p>
-                                            <p className="text-sm text-red-600">Por favor, intenta nuevamente o contáctanos por WhatsApp.</p>
+                                            <p className="text-sm font-semibold text-red-800 dark:text-red-300">Hubo un error al enviar el mensaje</p>
+                                            <p className="text-sm text-red-600 dark:text-red-400">Por favor, intenta nuevamente o contáctanos por WhatsApp.</p>
                                         </div>
                                     </div>
                                 )}
@@ -203,7 +203,7 @@ const ContactForm = () => {
                                 <button
                                     type="submit"
                                     disabled={state.submitting}
-                                    className="w-full py-4 bg-brand-600 text-white rounded-xl font-bold hover:bg-brand-700 transition flex items-center justify-center gap-2 shadow-lg shadow-brand-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="w-full py-4 bg-brand-600 text-white rounded-xl font-bold hover:bg-brand-700 dark:hover:bg-brand-500 transition flex items-center justify-center gap-2 shadow-lg shadow-brand-200 dark:shadow-none disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {state.submitting ? (
                                         <>
@@ -220,7 +220,7 @@ const ContactForm = () => {
 
                                 {/* WhatsApp Alternative */}
                                 <div className="text-center">
-                                    <p className="text-sm text-slate-500 mb-3">¿Prefieres contactarnos por WhatsApp?</p>
+                                    <p className="text-sm text-slate-500 dark:text-slate-400 mb-3 transition-colors duration-300">¿Prefieres contactarnos por WhatsApp?</p>
                                     <button
                                         type="button"
                                         onClick={handleWhatsApp}
@@ -243,44 +243,44 @@ const ContactForm = () => {
                         viewport={{ once: true }}
                         className="space-y-8"
                     >
-                        <div className="bg-brand-50 p-8 rounded-3xl border border-brand-100">
-                            <h3 className="text-2xl font-bold text-slate-900 mb-6">Información de Contacto</h3>
+                        <div className="bg-brand-50 dark:bg-brand-900/20 p-8 rounded-3xl border border-brand-100 dark:border-brand-800 transition-colors duration-300">
+                            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 transition-colors duration-300">Información de Contacto</h3>
 
                             <div className="space-y-6">
                                 <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                                        <Phone className="w-6 h-6 text-brand-600" />
+                                    <div className="w-12 h-12 bg-brand-100 dark:bg-brand-900/50 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-300">
+                                        <Phone className="w-6 h-6 text-brand-600 dark:text-brand-400" />
                                     </div>
                                     <div>
-                                        <h4 className="font-semibold text-slate-900 mb-1">Teléfono</h4>
-                                        <a href="tel:+51962268667" className="text-slate-600 hover:text-brand-600 transition">
+                                        <h4 className="font-semibold text-slate-900 dark:text-white mb-1 transition-colors duration-300">Teléfono</h4>
+                                        <a href="tel:+51962268667" className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition">
                                             +51 962268667
                                         </a>
                                     </div>
                                 </div>
 
                                 <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                                        <Mail className="w-6 h-6 text-brand-600" />
+                                    <div className="w-12 h-12 bg-brand-100 dark:bg-brand-900/50 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-300">
+                                        <Mail className="w-6 h-6 text-brand-600 dark:text-brand-400" />
                                     </div>
                                     <div>
-                                        <h4 className="font-semibold text-slate-900 mb-1">Email</h4>
-                                        <a href="mailto:contacto@menteoasis.com" className="text-slate-600 hover:text-brand-600 transition">
+                                        <h4 className="font-semibold text-slate-900 dark:text-white mb-1 transition-colors duration-300">Email</h4>
+                                        <a href="mailto:contacto@menteoasis.com" className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition">
                                             contacto@menteoasis.com
                                         </a>
                                     </div>
                                 </div>
 
                                 <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                                        <svg className="w-6 h-6 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div className="w-12 h-12 bg-brand-100 dark:bg-brand-900/50 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-300">
+                                        <svg className="w-6 h-6 text-brand-600 dark:text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                         </svg>
                                     </div>
                                     <div>
-                                        <h4 className="font-semibold text-slate-900 mb-1">Dirección</h4>
-                                        <p className="text-slate-600">
+                                        <h4 className="font-semibold text-slate-900 dark:text-white mb-1 transition-colors duration-300">Dirección</h4>
+                                        <p className="text-slate-600 dark:text-slate-300 transition-colors duration-300">
                                             Av. E-9, Av. Mariscal Cáceres 43<br />
                                             Talara 20811, Perú
                                         </p>
@@ -290,9 +290,9 @@ const ContactForm = () => {
                         </div>
 
                         {/* Horarios */}
-                        <div className="bg-white p-8 rounded-3xl shadow-lg border border-slate-100">
-                            <h3 className="text-xl font-bold text-slate-900 mb-4">Horarios de Atención</h3>
-                            <div className="space-y-3 text-slate-600">
+                        <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-lg border border-slate-100 dark:border-slate-700 transition-colors duration-300">
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 transition-colors duration-300">Horarios de Atención</h3>
+                            <div className="space-y-3 text-slate-600 dark:text-slate-300 transition-colors duration-300">
                                 <div className="flex justify-between">
                                     <span className="font-medium">Lunes, Viernes y Sábado</span>
                                     <span>2:00 PM - 7:00 PM</span>
@@ -303,15 +303,15 @@ const ContactForm = () => {
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="font-medium">Domingos</span>
-                                    <span className="text-slate-400">Cerrado</span>
+                                    <span className="text-slate-400 dark:text-slate-500">Cerrado</span>
                                 </div>
                             </div>
                         </div>
 
                         {/* Social Media */}
-                        <div className="bg-gradient-to-br from-brand-600 to-brand-700 p-8 rounded-3xl text-white">
+                        <div className="bg-gradient-to-br from-brand-600 to-brand-700 dark:from-slate-800 dark:to-slate-900 p-8 rounded-3xl text-white transition-colors duration-300">
                             <h3 className="text-xl font-bold mb-4">Síguenos en Redes</h3>
-                            <p className="text-brand-100 mb-6">
+                            <p className="text-brand-100 dark:text-slate-300 mb-6 transition-colors duration-300">
                                 Mantente al día con nuestros talleres, eventos y contenido sobre salud mental.
                             </p>
                             <div className="flex gap-3">
