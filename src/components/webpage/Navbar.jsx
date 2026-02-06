@@ -41,8 +41,8 @@ const Navbar = () => {
                             key={link.name}
                             href={link.href}
                             className={`font-medium transition-colors ${scrolled
-                                    ? 'text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400'
-                                    : 'text-slate-700 dark:text-slate-200 hover:text-brand-600 dark:hover:text-brand-400'
+                                ? 'text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400'
+                                : 'text-slate-700 dark:text-slate-200 hover:text-brand-600 dark:hover:text-brand-400'
                                 }`}
                         >
                             {link.name}
