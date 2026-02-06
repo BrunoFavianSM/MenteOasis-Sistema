@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Brain, LogIn, Sun, Moon } from 'lucide-react';
+import { Menu, X, Brain, LogIn, Sun, Moon, Volume2, VolumeX } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../../context/ThemeContext';
+import { useMusic } from '../../context/MusicContext';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const { theme, toggleTheme } = useTheme();
+    const { isMuted, toggleMute } = useMusic();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -41,13 +43,26 @@ const Navbar = () => {
                             key={link.name}
                             href={link.href}
                             className={`font-medium transition-colors ${scrolled
-                                    ? 'text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400'
-                                    : 'text-slate-700 dark:text-slate-200 hover:text-brand-600 dark:hover:text-brand-400'
+                                ? 'text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400'
+                                : 'text-slate-700 dark:text-slate-200 hover:text-brand-600 dark:hover:text-brand-400'
                                 }`}
                         >
                             {link.name}
                         </a>
                     ))}
+
+                    {/* Music Toggle Button */}
+                    <button
+                        onClick={toggleMute}
+                        className="p-2 rounded-xl transition-all duration-300 border border-slate-200 dark:border-slate-700 hover:border-brand-300 dark:hover:border-brand-500 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 flex items-center justify-center gap-2"
+                        title={isMuted ? "Reanudar música" : "Silenciar música"}
+                    >
+                        {isMuted ? (
+                            <VolumeX className="w-5 h-5 text-slate-500" />
+                        ) : (
+                            <Volume2 className="w-5 h-5 text-brand-600" />
+                        )}
+                    </button>
 
                     {/* Theme Toggle Button */}
                     <button
@@ -86,6 +101,13 @@ const Navbar = () => {
 
                 {/* Mobile Menu Button Group */}
                 <div className="md:hidden flex items-center gap-3">
+                    <button
+                        onClick={toggleMute}
+                        className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-all"
+                        title={isMuted ? "Reanudar música" : "Silenciar música"}
+                    >
+                        {isMuted ? <VolumeX className="w-6 h-6 text-slate-500" /> : <Volume2 className="w-6 h-6 text-brand-600" />}
+                    </button>
                     <button
                         onClick={toggleTheme}
                         className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-all"
