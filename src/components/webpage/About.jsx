@@ -24,7 +24,7 @@ const About = () => {
                         <div className="absolute inset-0 bg-brand-200 dark:bg-brand-900/30 rounded-2xl transform rotate-3 scale-105 opacity-30 transition-colors duration-300" />
                         <img
                             src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                            alt="Sesión de terapia"
+                            alt="Psicóloga profesional en sesión de terapia individual en MenteOasis"
                             className="rounded-2xl shadow-xl w-full object-cover h-[400px] lg:h-[500px] relative z-10"
                         />
                     </motion.div>
@@ -39,7 +39,7 @@ const About = () => {
                         <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6 transition-colors duration-300">Sobre MenteOasis</h2>
                         <p className="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed transition-colors duration-300">
                             En MenteOasis, nos dedicamos a proporcionar un refugio para tu mente.
-                            Somos un equipo de psicólogos comprometidos con tu bienestar emocional,
+                            Somos un equipo de profesionales comprometidos con tu bienestar emocional,
                             ofreciendo herramientas prácticas y apoyo profesional para superar los
                             desafíos de la vida diaria.
                         </p>

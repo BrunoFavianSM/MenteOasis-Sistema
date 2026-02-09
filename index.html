@@ -1,14 +1,84 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="MenteOasis - Centro psicológico profesional para tu bienestar emocional. Terapias, talleres y eventos." />
-    <title>MenteOasis | Tu Espacio de Bienestar</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Básico -->
+  <title>MenteOasis | Centro Psicológico & Bienestar Emocional</title>
+  <meta name="description"
+    content="MenteOasis es un centro psicológico profesional dedicado a tu bienestar emocional. Ofrecemos terapia individual, de pareja, talleres y eventos en un espacio seguro y confidencial." />
+  <meta name="keywords"
+    content="psicología, bienestar emocional, terapia psicológica, salud mental, talleres de psicología, MenteOasis, psicólogos profesionales" />
+  <meta name="author" content="MenteOasis" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://menteoasis.com/" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://menteoasis.com/" />
+  <meta property="og:title" content="MenteOasis | Centro Psicológico & Bienestar Emocional" />
+  <meta property="og:description"
+    content="Encuentra el equilibrio emocional que buscas. Terapias profesionales, talleres y un espacio para tu crecimiento personal." />
+  <meta property="og:image" content="https://menteoasis.com/og-image.jpg" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://menteoasis.com/" />
+  <meta property="twitter:title" content="MenteOasis | Centro Psicológico & Bienestar Emocional" />
+  <meta property="twitter:description"
+    content="Encuentra el equilibrio emocional que buscas. Terapias profesionales, talleres y un espacio para tu crecimiento personal." />
+  <meta property="twitter:image" content="https://menteoasis.com/og-image.jpg" />
+
+  <!-- Structured Data / JSON-LD -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HealthAndBeautyBusiness",
+      "name": "MenteOasis",
+      "image": "https://menteoasis.com/logo.png",
+      "@id": "https://menteoasis.com",
+      "url": "https://menteoasis.com",
+      "telephone": "+51999999999",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Principal 123",
+        "addressLocality": "Lima",
+        "addressRegion": "Lima",
+        "postalCode": "15000",
+        "addressCountry": "PE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -12.046374,
+        "longitude": -77.042793
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "09:00",
+        "closes": "20:00"
+      },
+      "sameAs": [
+        "https://www.facebook.com/menteoasis",
+        "https://www.instagram.com/menteoasis"
+      ]
+    }
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>
