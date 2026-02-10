@@ -1,17 +1,48 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BrainCircuit, Star, CalendarDays } from 'lucide-react';
+import { Music, Palette, BrainCircuit, Users, Star, CalendarDays } from 'lucide-react';
 
 const Workshops = () => {
     const workshops = [
         {
-            title: "Manejo del Estrés",
-            description: "Aprende técnicas prácticas de relajación, respiración y mindfulness para recuperar el control y la calma en tu vida diaria.",
-            date: "Disponible mensualmente",
+            title: "Música",
+            description: "Explora la expresión emocional y el bienestar a través del sonido y el ritmo.",
+            date: "Sábados por la mañana",
+            icon: <Music className="w-8 h-8" />,
+            color: "bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400",
+            image: "https://images.unsplash.com/photo-1514119412050-ebd491a1e9a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            title: "Arte",
+            description: "Un espacio creativo para el autodescubrimiento mediante diversas técnicas artísticas.",
+            date: "Viernes por la tarde",
+            icon: <Palette className="w-8 h-8" />,
+            color: "bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400",
+            image: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            title: "Ingeniería",
+            description: "Fomentamos el pensamiento lógico y la resolución de problemas técnicos y creativos.",
+            date: "Martes y Jueves",
             icon: <BrainCircuit className="w-8 h-8" />,
             color: "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400",
-            image: "https://images.unsplash.com/photo-1544367563-12123d8965cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            //price: "S/. 30 / Sesión"
+            image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            title: "Atención y concentración",
+            description: "Ejercicios diseñados para fortalecer el enfoque y la presencia mental en el día a día.",
+            date: "Lunes y Miércoles",
+            icon: <Star className="w-8 h-8" />,
+            color: "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400",
+            image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            title: "Habilidades cognitivas",
+            description: "Entrenamiento en memoria, resolución de conflictos y otras funciones ejecutivas esenciales.",
+            date: "Disponible mensualmente",
+            icon: <Users className="w-8 h-8" />,
+            color: "bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400",
+            image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
         }
     ];
 
@@ -42,20 +73,21 @@ const Workshops = () => {
                     </motion.div>
                 </div>
 
-                <div className="max-w-md mx-auto mb-12">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                     {workshops.map((workshop, index) => (
                         <motion.div
                             key={workshop.title || index}
                             initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.3 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.3, delay: index * 0.1 }}
                             className="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-xl dark:shadow-slate-900/50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col h-full border border-slate-100 dark:border-slate-800 group"
                         >
                             <div className="relative h-48 overflow-hidden">
                                 <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors z-10" />
                                 <img
                                     src={workshop.image}
-                                    alt={workshop.title}
+                                    alt={`Taller de ${workshop.title} en MenteOasis`}
                                     className="w-full h-full object-cover transform group-hover:scale-110 transition duration-700"
                                 />
                                 <div className="absolute top-4 right-4 z-20 bg-white/90 dark:bg-slate-900/90 backdrop-blur text-slate-800 dark:text-slate-200 text-xs font-bold px-3 py-1 rounded-full shadow-sm">
@@ -68,9 +100,6 @@ const Workshops = () => {
                                     <div className={`p-3 rounded-2xl ${workshop.color} transition-colors duration-300`}>
                                         {workshop.icon}
                                     </div>
-                                    <span className="text-slate-900 dark:text-white font-bold bg-slate-50 dark:bg-slate-800 px-3 py-1 rounded-lg transition-colors duration-300">
-                                        {workshop.price}
-                                    </span>
                                 </div>
 
                                 <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors duration-300">

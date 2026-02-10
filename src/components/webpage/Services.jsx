@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { User, Users, HeartHandshake, Phone } from 'lucide-react';
+import { User, Users, HeartHandshake, Phone, BookOpen } from 'lucide-react';
 
 const Services = () => {
     const services = [
@@ -23,6 +23,16 @@ const Services = () => {
             title: "Consulta Online",
             description: "Accede a nuestros especialistas desde la comodidad de tu hogar.",
             icon: <Phone className="w-8 h-8 text-brand-600 dark:text-brand-400" />
+        },
+        {
+            title: "Talleres",
+            description: "Programas grupales enfocados en el aprendizaje y desarrollo de habilidades.",
+            icon: <BookOpen className="w-8 h-8 text-brand-600 dark:text-brand-400" />
+        },
+        {
+            title: "GAM: Grupos de ayuda mutua",
+            description: "Espacios compartidos para el apoyo recíproco entre personas con vivencias similares.",
+            icon: <Users className="w-8 h-8 text-brand-600 dark:text-brand-400" />
         }
     ];
 
