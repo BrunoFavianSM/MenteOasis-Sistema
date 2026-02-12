@@ -1,56 +1,89 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Music, Palette, BrainCircuit, Users, Star, CalendarDays } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Music, Palette, BrainCircuit, Users, Star, CalendarDays, Briefcase, GraduationCap, Sparkles, ChevronDown } from 'lucide-react';
 
 const Workshops = () => {
-    const workshops = [
+    const [expandedCategory, setExpandedCategory] = useState(null);
+
+    const categories = [
         {
-            title: "Música",
-            description: "Explora la expresión emocional y el bienestar a través del sonido y el ritmo.",
-            date: "Sábados por la mañana",
-            icon: <Music className="w-8 h-8" />,
-            color: "bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400",
-            image: "https://images.unsplash.com/photo-1514119412050-ebd491a1e9a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            id: 'adults-gam',
+            title: "Talleres para Adultos y Adolescentes (GAM)",
+            description: "Espacios de crecimiento y grupos de ayuda mutua.",
+            icon: <Users className="w-6 h-6" />,
+            color: "bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400",
+            image: "https://images.unsplash.com/photo-1529156069896-859328862430?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            items: [
+                { title: "Manejo de la Ansiedad (GAM)", desc: "Grupo de apoyo para compartir y aprender estrategias de afrontamiento." },
+                { title: "Habilidades Sociales para Adolescentes", desc: "Mejora la comunicación y confianza en situaciones sociales." },
+                { title: "Gestión Emocional", desc: "Aprende a identificar y regular tus emociones de manera saludable." }
+            ]
         },
         {
-            title: "Arte",
-            description: "Un espacio creativo para el autodescubrimiento mediante diversas técnicas artísticas.",
-            date: "Viernes por la tarde",
-            icon: <Palette className="w-8 h-8" />,
+            id: 'shows',
+            title: "Shows Sensoriales y Eventos con Propósito",
+            description: "Experiencias mágicas para cumpleaños y fechas especiales.",
+            icon: <Sparkles className="w-6 h-6" />,
             color: "bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400",
-            image: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            items: [
+                { title: "Cumpleaños Sensoriales", desc: "Celebraciones adaptadas con estímulos controlados y divertidos." },
+                { title: "Día del Niño Inclusivo", desc: "Eventos diseñados para que todos disfruten por igual." },
+                { title: "Activaciones con Propósito", desc: "Eventos que educan y entretienen." }
+            ]
         },
         {
-            title: "Ingeniería",
-            description: "Fomentamos el pensamiento lógico y la resolución de problemas técnicos y creativos.",
-            date: "Martes y Jueves",
-            icon: <BrainCircuit className="w-8 h-8" />,
+            id: 'corporate',
+            title: "Servicios Corporativos",
+            description: "Potenciamos el bienestar y rendimiento en tu empresa.",
+            icon: <Briefcase className="w-6 h-6" />,
             color: "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400",
-            image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            items: [
+                { title: "Manejo del Estrés Laboral", desc: "Técnicas prácticas para equipos de alto rendimiento." },
+                { title: "Liderazgo Empático", desc: "Formación para líderes que inspiran." },
+                { title: "Clima Laboral Positivo", desc: "Dinámicas de integración y comunicación." }
+            ]
         },
         {
-            title: "Atención y concentración",
-            description: "Ejercicios diseñados para fortalecer el enfoque y la presencia mental en el día a día.",
-            date: "Lunes y Miércoles",
-            icon: <Star className="w-8 h-8" />,
-            color: "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400",
-            image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            id: 'educational',
+            title: "Talleres Educativos y de Desarrollo (STEAM)",
+            description: "Ingeniería, Arte y Habilidades para el futuro.",
+            icon: <BrainCircuit className="w-6 h-6" />,
+            color: "bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400",
+            image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            items: [
+                { title: "Habilidades de Ingeniería", desc: "Construcción con bloques, retos prácticos, armado y desarmado de sistemas." },
+                { title: "Psico Expresa", desc: "Gestión de emociones, teatro, autoestima, empatía y comunicación." },
+                { title: "Habilidades Blandas", desc: "Liderazgo, trabajo en equipo, resolución de conflictos y tolerancia al estrés." },
+                { title: "Habilidades Artísticas", desc: "Música (lectura, instrumentos), dibujo, pintura y manualidades." },
+                { title: "Habilidades Cognitivas", desc: "Atención, memoria, planificación y razonamiento." }
+            ]
         },
         {
-            title: "Habilidades cognitivas",
-            description: "Entrenamiento en memoria, resolución de conflictos y otras funciones ejecutivas esenciales.",
-            date: "Disponible mensualmente",
-            icon: <Users className="w-8 h-8" />,
-            color: "bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400",
-            image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            id: 'institutional',
+            title: "Servicios Institucionales",
+            description: "Programas integrales para colegios y universidades.",
+            icon: <GraduationCap className="w-6 h-6" />,
+            color: "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400",
+            image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            items: [
+                { title: "Escuela para Padres", desc: "Orientación en crianza respetuosa y límites." },
+                { title: "Capacitación Docente", desc: "Estrategias de manejo conductual en el aula." },
+                { title: "Prevención del Bullying", desc: "Programas de convivencia escolar." }
+            ]
         }
     ];
 
+    const toggleCategory = (id) => {
+        setExpandedCategory(expandedCategory === id ? null : id);
+    };
+
     return (
-        <section id="workshops" className="py-24 bg-gradient-to-b from-brand-50 to-white dark:from-slate-950 dark:to-slate-900 relative overflow-hidden transition-colors duration-300">
+        <section id="workshops" className="py-24 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950 relative overflow-hidden transition-colors duration-300">
             {/* Decorative Elements */}
-            <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[500px] h-[500px] bg-brand-200 dark:bg-brand-900/20 rounded-full blur-[100px] opacity-30 pointer-events-none transition-colors duration-300" />
-            <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-indigo-200 dark:bg-indigo-900/20 rounded-full blur-[100px] opacity-30 pointer-events-none transition-colors duration-300" />
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-200/40 dark:bg-brand-900/10 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-200/40 dark:bg-indigo-900/10 rounded-full blur-[120px] pointer-events-none" />
 
             <div className="container mx-auto px-6 relative z-10">
                 <div className="text-center max-w-3xl mx-auto mb-16">
@@ -59,76 +92,96 @@ const Workshops = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-100 dark:bg-brand-900/50 text-brand-700 dark:text-brand-300 rounded-full text-sm font-bold mb-4 transition-colors duration-300">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-100 dark:bg-brand-900/50 text-brand-700 dark:text-brand-300 rounded-full text-sm font-bold mb-4">
                             <Star className="w-4 h-4 fill-brand-700 dark:fill-brand-300" />
-                            <span>Nuestros Programas Estelares</span>
+                            <span>Programas Especializados</span>
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6 tracking-tight transition-colors duration-300">
-                            Talleres de Crecimiento Personal
+                        <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6 tracking-tight">
+                            Talleres y Experiencias
                         </h2>
-                        <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed transition-colors duration-300">
-                            Potencia tu bienestar con nuestras experiencias grupales diseñadas por expertos.
-                            Sumérgete en un ambiente de aprendizaje, apoyo y transformación.
+                        <p className="text-lg text-slate-600 dark:text-slate-300">
+                            Descubre nuestros espacios diseñados para cada etapa y necesidad.
+                            <span className="font-semibold text-brand-600 dark:text-brand-400"> Haz clic en una categoría para ver más.</span>
                         </p>
                     </motion.div>
                 </div>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                    {workshops.map((workshop, index) => (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {categories.map((category) => (
                         <motion.div
-                            key={workshop.title || index}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.3, delay: index * 0.1 }}
-                            className="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-xl dark:shadow-slate-900/50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col h-full border border-slate-100 dark:border-slate-800 group"
+                            layout
+                            key={category.id}
+                            onClick={() => toggleCategory(category.id)}
+                            className={`group cursor-pointer rounded-3xl overflow-hidden border transition-all duration-300 ${expandedCategory === category.id
+                                    ? 'col-span-1 md:col-span-2 lg:col-span-3 bg-white dark:bg-slate-800 shadow-2xl ring-2 ring-brand-500/20'
+                                    : 'bg-white dark:bg-slate-900 shadow-lg hover:shadow-xl border-slate-100 dark:border-slate-800'
+                                }`}
                         >
-                            <div className="relative h-48 overflow-hidden">
-                                <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors z-10" />
+                            <motion.div layout className="relative h-48 overflow-hidden">
                                 <img
-                                    src={workshop.image}
-                                    alt={`Taller de ${workshop.title} en MenteOasis`}
-                                    className="w-full h-full object-cover transform group-hover:scale-110 transition duration-700"
+                                    src={category.image}
+                                    alt={category.title}
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                 />
-                                <div className="absolute top-4 right-4 z-20 bg-white/90 dark:bg-slate-900/90 backdrop-blur text-slate-800 dark:text-slate-200 text-xs font-bold px-3 py-1 rounded-full shadow-sm">
-                                    Inscripciones Abiertas
-                                </div>
-                            </div>
-
-                            <div className="p-8 flex-1 flex flex-col">
-                                <div className="flex items-start justify-between mb-4">
-                                    <div className={`p-3 rounded-2xl ${workshop.color} transition-colors duration-300`}>
-                                        {workshop.icon}
+                                <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/30 transition-colors" />
+                                <div className="absolute bottom-0 left-0 p-6 w-full">
+                                    <div className="flex justify-between items-end">
+                                        <div>
+                                            <div className={`inline-flex p-2 rounded-xl mb-3 ${category.color} backdrop-blur-md bg-white/90 dark:bg-slate-900/80`}>
+                                                {category.icon}
+                                            </div>
+                                            <h3 className="text-xl md:text-2xl font-bold text-white mb-1 shadow-sm">
+                                                {category.title}
+                                            </h3>
+                                        </div>
+                                        <motion.div
+                                            animate={{ rotate: expandedCategory === category.id ? 180 : 0 }}
+                                            className="bg-white/20 backdrop-blur-md p-2 rounded-full text-white"
+                                        >
+                                            <ChevronDown className="w-6 h-6" />
+                                        </motion.div>
                                     </div>
                                 </div>
+                            </motion.div>
 
-                                <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors duration-300">
-                                    {workshop.title}
-                                </h3>
-
-                                <p className="text-slate-600 dark:text-slate-300 mb-6 flex-1 transition-colors duration-300">
-                                    {workshop.description}
-                                </p>
-
-                                <div className="space-y-4 mt-auto">
-                                    <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 font-medium transition-colors duration-300">
-                                        <CalendarDays className="w-4 h-4 text-brand-500 dark:text-brand-400" />
-                                        {workshop.date}
-                                    </div>
-                                    <button className="w-full py-3 bg-slate-900 dark:bg-brand-600 text-white rounded-xl font-bold hover:bg-brand-600 dark:hover:bg-brand-500 transition-colors shadow-lg shadow-slate-200 dark:shadow-none">
-                                        Reservar Cupo
-                                    </button>
-                                </div>
-                            </div>
+                            <AnimatePresence>
+                                {expandedCategory === category.id && (
+                                    <motion.div
+                                        initial={{ opacity: 0, height: 0 }}
+                                        animate={{ opacity: 1, height: "auto" }}
+                                        exit={{ opacity: 0, height: 0 }}
+                                        transition={{ duration: 0.3 }}
+                                        className="border-t border-slate-100 dark:border-slate-700"
+                                    >
+                                        <div className="p-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6 bg-slate-50/50 dark:bg-slate-800/50">
+                                            {category.items.map((item, idx) => (
+                                                <motion.div
+                                                    key={idx}
+                                                    initial={{ opacity: 0, y: 20 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    transition={{ delay: idx * 0.1 }}
+                                                    className="bg-white dark:bg-slate-700 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-600/50 hover:border-brand-200 dark:hover:border-brand-500/30 transition-colors"
+                                                >
+                                                    <h4 className="font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+                                                        <div className="w-2 h-2 rounded-full bg-brand-500" />
+                                                        {item.title}
+                                                    </h4>
+                                                    <p className="text-sm text-slate-600 dark:text-slate-300">
+                                                        {item.desc}
+                                                    </p>
+                                                </motion.div>
+                                            ))}
+                                            <div className="md:col-span-2 lg:col-span-3 mt-4 text-center">
+                                                <button className="px-8 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl font-bold transition-colors shadow-lg shadow-brand-500/20">
+                                                    Solicitar Información sobre estos Talleres
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </motion.div>
                     ))}
-                </div>
-
-                <div className="mt-16 text-center">
-                    <p className="text-slate-500 dark:text-slate-400 mb-4 transition-colors duration-300">¿Buscas algo diferente?</p>
-                    <a href="#contact" className="inline-flex items-center text-brand-700 dark:text-brand-400 font-bold hover:underline gap-1 cursor-pointer transition-colors duration-300">
-                        Consulta por talleres personalizados <span aria-hidden="true">&rarr;</span>
-                    </a>
                 </div>
             </div>
         </section>

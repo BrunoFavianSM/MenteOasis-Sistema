@@ -1,37 +1,47 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { User, Users, HeartHandshake, Phone, BookOpen } from 'lucide-react';
+import { User, Users, HeartHandshake, Phone, BookOpen, Star } from 'lucide-react';
 
 const Services = () => {
     const services = [
         {
             title: "Terapia Individual",
-            description: "Espacio personal para abordar ansiedad, depresión y crecimiento personal.",
+            description: "Atención 100% personalizada. Desde el manejo de ansiedad y depresión hasta el desarrollo personal. Especialistas en atención adaptada para niños con autismo y TDAH, potenciando sus capacidades únicas.",
             icon: <User className="w-8 h-8 text-brand-600 dark:text-brand-400" />
         },
         {
             title: "Terapia de Pareja",
-            description: "Mejoren la comunicación y fortalezcan su vínculo emocional.",
+            description: "Recuperen la armonía o transformen sus conflictos en acuerdos constructivos. Apoyo especializado tanto para parejas unidas como separadas que buscan una coparentalidad sana por el bienestar de sus hijos.",
             icon: <HeartHandshake className="w-8 h-8 text-brand-600 dark:text-brand-400" />
         },
         {
-            title: "Terapia Familiar",
-            description: "Soluciones para conflictos y dinámicas familiares complejas.",
-            icon: <Users className="w-8 h-8 text-brand-600 dark:text-brand-400" />
-        },
-        {
-            title: "Consulta Online",
-            description: "Accede a nuestros especialistas desde la comodidad de tu hogar.",
+            title: "Terapia Virtual",
+            description: "Tu bienestar no tiene fronteras. Accede a terapia profesional desde la comodidad y privacidad de tu hogar, con la misma calidez y eficacia que una sesión presencial.",
             icon: <Phone className="w-8 h-8 text-brand-600 dark:text-brand-400" />
         },
         {
-            title: "Talleres",
-            description: "Programas grupales enfocados en el aprendizaje y desarrollo de habilidades.",
+            title: "Terapia Familiar",
+            description: "Fortalece los lazos que importan. Intervención sistémica para resolver conflictos y mejorar la dinámica en el hogar, incluyendo el acompañamiento a padres separados en beneficio de sus hijos.",
+            icon: <Users className="w-8 h-8 text-brand-600 dark:text-brand-400" />
+        },
+        {
+            title: "Talleres Educativos y de desarrollo",
+            description: "Espacios de aprendizaje activo para potenciar habilidades clave en ingeniería, arte y función cognitiva.",
             icon: <BookOpen className="w-8 h-8 text-brand-600 dark:text-brand-400" />
         },
         {
-            title: "GAM: Grupos de ayuda mutua",
-            description: "Espacios compartidos para el apoyo recíproco entre personas con vivencias similares.",
+            title: "Talleres para Adultos",
+            description: "Programas diseñados para el crecimiento personal, gestión emocional y desarrollo de nuevas competencias.",
+            icon: <User className="w-8 h-8 text-brand-600 dark:text-brand-400" />
+        },
+        {
+            title: "Shows sensoriales y eventos",
+            description: "Experiencias inmersivas con propósito, diseñadas para estimular los sentidos y crear memorias inolvidables.",
+            icon: <Star className="w-8 h-8 text-brand-600 dark:text-brand-400" />
+        },
+        {
+            title: "Servicios Corporativos & Institucionales",
+            description: "Charlas, talleres y capacitaciones de alto impacto para empresas, colegios y universidades. Potenciamos el capital humano.",
             icon: <Users className="w-8 h-8 text-brand-600 dark:text-brand-400" />
         }
     ];

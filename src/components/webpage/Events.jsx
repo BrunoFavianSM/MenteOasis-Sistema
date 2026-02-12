@@ -8,9 +8,33 @@ const Events = () => {
             title: 'Salud Integral',
             date: "11 de Abril, 2026",
             time: "4:00 PM",
-            location: "Semana de la Salud Integral",
+            location: "Auditorio Pérez de Cuéllar",
             image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_KVeu3RnnZ_JT_2YWc1qHDOKs7lFqhudp0g&s",
             formUrl: "https://docs.google.com/forms/d/e/1FAIpQLScVAAGNSYw6dssSoLH_DEO3yqRdteagh0lppJ9vi3UkVq8sdw/viewform?usp=dialog"
+        },
+        {
+            title: 'Septiembre: Lucha contra el suicidio',
+            date: "10 de Septiembre, 2026",
+            time: "6:00 PM",
+            location: "Centro de Convenciones",
+            image: "https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            formUrl: "#"
+        },
+        {
+            title: 'Día de la Salud Mental',
+            date: "10 de Octubre, 2026",
+            time: "5:00 PM",
+            location: "Parque Central",
+            image: "https://images.unsplash.com/photo-1493836512294-502baa1986e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            formUrl: "#"
+        },
+        {
+            title: 'Día del Psicólogo',
+            date: "30 de Abril, 2026",
+            time: "7:00 PM",
+            location: "Auditorio Principal",
+            image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            formUrl: "#"
         }
     ];
 
@@ -44,20 +68,20 @@ const Events = () => {
                     </motion.div>
                 </div>
 
-                <div className="flex justify-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
                     {events.map((event, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.2 }}
-                            className="group relative max-w-2xl w-full"
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            className="group relative w-full h-full"
                         >
                             {/* Card Glow Effect */}
                             <div className="absolute -inset-1 bg-gradient-to-r from-brand-500 to-indigo-600 rounded-[2rem] blur opacity-25 group-hover:opacity-60 transition duration-1000 group-hover:duration-200" />
 
-                            <div className="relative flex flex-col md:flex-row bg-slate-900/80 backdrop-blur-2xl border border-white/10 rounded-[2rem] overflow-hidden shadow-2xl">
+                            <div className="relative flex flex-col md:flex-row bg-slate-900/80 backdrop-blur-2xl border border-white/10 rounded-[2rem] overflow-hidden shadow-2xl h-full">
                                 {/* Image Section */}
                                 <div className="md:w-2/5 h-64 md:h-auto overflow-hidden relative">
                                     <img
@@ -67,49 +91,53 @@ const Events = () => {
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent md:bg-gradient-to-r" />
 
-                                    {/* Date Badge over Image for Mobile */}
-                                    <div className="absolute top-6 left-6 md:hidden">
+                                    {/* Date Badge over Image */}
+                                    <div className="absolute top-6 left-6">
                                         <div className="bg-brand-500/90 backdrop-blur-md text-white font-black px-4 py-2 rounded-2xl shadow-xl flex flex-col items-center">
-                                            <span className="text-sm">ABR</span>
-                                            <span className="text-2xl -mt-1">11</span>
+                                            <span className="text-sm uppercase">
+                                                {event.date.includes('Abril') ? 'ABR' :
+                                                    event.date.includes('Septiembre') ? 'SEP' :
+                                                        event.date.includes('Octubre') ? 'OCT' : 'EVENTO'}
+                                            </span>
+                                            <span className="text-2xl -mt-1">{event.date.split(' ')[0]}</span>
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Content Section */}
-                                <div className="md:w-3/5 p-8 md:p-12 flex flex-col justify-center">
-                                    <div className="mb-6">
-                                        <h3 className="text-3xl md:text-4xl font-bold mb-4 group-hover:text-brand-400 transition-colors duration-300 leading-tight">
+                                <div className="md:w-3/5 p-6 md:p-8 flex flex-col justify-center">
+                                    <div className="mb-4">
+                                        <h3 className="text-2xl md:text-3xl font-bold mb-3 group-hover:text-brand-400 transition-colors duration-300 leading-tight">
                                             {event.title}
                                         </h3>
                                         <div className="h-1 w-12 bg-brand-500 rounded-full group-hover:w-24 transition-all duration-500" />
                                     </div>
 
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
-                                        <div className="flex items-center gap-4 group/item">
-                                            <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover/item:bg-brand-500/20 transition-colors">
-                                                <Calendar className="w-5 h-5 text-brand-400" />
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                                        <div className="flex items-center gap-3 group/item">
+                                            <div className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center group-hover/item:bg-brand-500/20 transition-colors">
+                                                <Calendar className="w-4 h-4 text-brand-400" />
                                             </div>
                                             <div className="flex flex-col">
-                                                <span className="text-xs text-slate-500 uppercase font-bold tracking-wider">Fecha</span>
+                                                <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Fecha</span>
                                                 <span className="text-sm font-semibold">{event.date}</span>
                                             </div>
                                         </div>
-                                        <div className="flex items-center gap-4 group/item">
-                                            <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover/item:bg-brand-500/20 transition-colors">
-                                                <Clock className="w-5 h-5 text-brand-400" />
+                                        <div className="flex items-center gap-3 group/item">
+                                            <div className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center group-hover/item:bg-brand-500/20 transition-colors">
+                                                <Clock className="w-4 h-4 text-brand-400" />
                                             </div>
                                             <div className="flex flex-col">
-                                                <span className="text-xs text-slate-500 uppercase font-bold tracking-wider">Hora</span>
+                                                <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Hora</span>
                                                 <span className="text-sm font-semibold">{event.time}</span>
                                             </div>
                                         </div>
-                                        <div className="flex items-center gap-4 group/item sm:col-span-2">
-                                            <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover/item:bg-brand-500/20 transition-colors">
-                                                <MapPin className="w-5 h-5 text-brand-400" />
+                                        <div className="flex items-center gap-3 group/item sm:col-span-2">
+                                            <div className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center group-hover/item:bg-brand-500/20 transition-colors">
+                                                <MapPin className="w-4 h-4 text-brand-400" />
                                             </div>
                                             <div className="flex flex-col">
-                                                <span className="text-xs text-slate-500 uppercase font-bold tracking-wider">Ubicación</span>
+                                                <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Ubicación</span>
                                                 <span className="text-sm font-semibold">{event.location}</span>
                                             </div>
                                         </div>
@@ -121,7 +149,7 @@ const Events = () => {
                                         href={event.formUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="w-full py-5 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white rounded-2xl font-black shadow-xl shadow-brand-500/20 flex items-center justify-center gap-3 transition-all duration-300 group/btn"
+                                        className="w-full py-4 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white rounded-2xl font-black shadow-xl shadow-brand-500/20 flex items-center justify-center gap-3 transition-all duration-300 group/btn"
                                     >
                                         Inscribirse Ahora
                                         <ExternalLink className="w-5 h-5 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />

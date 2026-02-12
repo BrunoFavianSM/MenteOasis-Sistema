@@ -17,7 +17,7 @@ const Hero = () => {
                         transition={{ duration: 0.6 }}
                     >
                         <span className="inline-block py-1 px-3 rounded-full bg-brand-100 dark:bg-brand-900/50 text-brand-700 dark:text-brand-300 text-sm font-semibold mb-6 transition-colors duration-300">
-                            Tu espacio de tranquilidad
+                            Dios tiene un plan que lleva tu nombre
                         </span>
                         <h1 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white mb-6 leading-tight transition-colors duration-300">
                             Encuentra el equilibrio en <span className="text-brand-600 dark:text-brand-400">MenteOasis</span>
