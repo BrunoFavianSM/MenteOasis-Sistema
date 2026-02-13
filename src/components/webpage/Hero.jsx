@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 
 const Hero = () => {
     const phrases = [
@@ -79,9 +79,30 @@ const Hero = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        <span className="inline-block py-1 px-3 rounded-full bg-brand-100 dark:bg-brand-900/50 text-brand-700 dark:text-brand-300 text-sm font-semibold mb-6 transition-colors duration-300">
-                            Dios tiene un plan que lleva tu nombre
-                        </span>
+                        <div className="relative inline-block mb-6 pt-1">
+                            {/* Outer Glow Effect */}
+                            <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-400 to-teal-400 rounded-full blur opacity-30 animate-pulse" />
+
+                            <motion.span
+                                animate={{
+                                    scale: [1, 1.02, 1],
+                                }}
+                                transition={{
+                                    duration: 4,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                }}
+                                className="relative flex items-center gap-2 py-1.5 px-5 rounded-full bg-white dark:bg-slate-900 border border-brand-100 dark:border-brand-900/50 shadow-sm overflow-hidden group"
+                            >
+                                {/* Shimmer Effect overlay */}
+                                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 dark:via-brand-400/10 to-transparent -translate-x-full animate-shimmer" />
+
+                                <Sparkles size={14} className="text-brand-500 animate-pulse" />
+                                <span className="bg-gradient-to-r from-brand-700 to-brand-500 dark:from-brand-300 dark:to-teal-300 bg-clip-text text-transparent text-sm font-bold tracking-tight">
+                                    Dios tiene un plan que lleva tu nombre
+                                </span>
+                            </motion.span>
+                        </div>
                         <h1 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white mb-6 leading-tight transition-colors duration-300">
                             Encuentra el equilibrio en <span className="text-brand-600 dark:text-brand-400">MenteOasis</span>
                         </h1>

@@ -55,9 +55,13 @@ const Workshops = () => {
             items: [
                 { title: "Habilidades de Ingeniería", desc: "Construcción con bloques, retos prácticos, armado y desarmado de sistemas." },
                 { title: "Psico Expresa", desc: "Gestión de emociones, teatro, autoestima, empatía y comunicación." },
-                { title: "Habilidades Blandas", desc: "Liderazgo, trabajo en equipo, resolución de conflictos y tolerancia al estrés." },
-                { title: "Habilidades Artísticas", desc: "Música (lectura, instrumentos), dibujo, pintura y manualidades." },
-                { title: "Habilidades Cognitivas", desc: "Atención, memoria, planificación y razonamiento." }
+                { title: "Habilidades Blandas", desc: "Manejo del comportamiento, tolerancia al estrés, trabajo en equipo, liderazgo, resolución de conflictos, creatividad." },
+                {
+                    title: "Habilidades Artísticas", desc: "Lectura de partitura musical, tocar instrumentos de guitarra, teclado, melódica o violín, manualidades, dibujo y pintura."
+                },
+                {
+                    title: "Habilidades Cognitivas", desc: "Atención y concentración, memoria, comprensión, planificación, razonamiento."
+                }
             ]
         },
         {
@@ -108,41 +112,33 @@ const Workshops = () => {
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {categories.map((category) => (
-                        <motion.div
-                            layout
+                        <div
                             key={category.id}
                             onClick={() => toggleCategory(category.id)}
                             className={`group cursor-pointer rounded-3xl overflow-hidden border transition-all duration-300 ${expandedCategory === category.id
-                                    ? 'col-span-1 md:col-span-2 lg:col-span-3 bg-white dark:bg-slate-800 shadow-2xl ring-2 ring-brand-500/20'
-                                    : 'bg-white dark:bg-slate-900 shadow-lg hover:shadow-xl border-slate-100 dark:border-slate-800'
+                                ? 'col-span-1 md:col-span-2 lg:col-span-3 bg-white dark:bg-slate-800 shadow-2xl ring-2 ring-brand-500/20'
+                                : 'bg-white dark:bg-slate-900 shadow-lg hover:shadow-xl border-slate-100 dark:border-slate-800'
                                 }`}
                         >
-                            <motion.div layout className="relative h-48 overflow-hidden">
-                                <img
-                                    src={category.image}
-                                    alt={category.title}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                />
-                                <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/30 transition-colors" />
-                                <div className="absolute bottom-0 left-0 p-6 w-full">
-                                    <div className="flex justify-between items-end">
-                                        <div>
-                                            <div className={`inline-flex p-2 rounded-xl mb-3 ${category.color} backdrop-blur-md bg-white/90 dark:bg-slate-900/80`}>
-                                                {category.icon}
-                                            </div>
-                                            <h3 className="text-xl md:text-2xl font-bold text-white mb-1 shadow-sm">
-                                                {category.title}
-                                            </h3>
+                            <div className="relative p-6">
+                                <div className="flex justify-between items-center">
+                                    <div className="flex items-center gap-4">
+                                        <div className={`inline-flex p-3 rounded-xl ${category.color} bg-opacity-20`}>
+                                            {category.icon}
                                         </div>
-                                        <motion.div
-                                            animate={{ rotate: expandedCategory === category.id ? 180 : 0 }}
-                                            className="bg-white/20 backdrop-blur-md p-2 rounded-full text-white"
-                                        >
-                                            <ChevronDown className="w-6 h-6" />
-                                        </motion.div>
+                                        <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">
+                                            {category.title}
+                                        </h3>
                                     </div>
+                                    <motion.div
+                                        animate={{ rotate: expandedCategory === category.id ? 180 : 0 }}
+                                        transition={{ duration: 0.3 }}
+                                        className="bg-slate-100 dark:bg-slate-700 p-2 rounded-full text-slate-600 dark:text-slate-300"
+                                    >
+                                        <ChevronDown className="w-6 h-6" />
+                                    </motion.div>
                                 </div>
-                            </motion.div>
+                            </div>
 
                             <AnimatePresence>
                                 {expandedCategory === category.id && (
@@ -150,16 +146,13 @@ const Workshops = () => {
                                         initial={{ opacity: 0, height: 0 }}
                                         animate={{ opacity: 1, height: "auto" }}
                                         exit={{ opacity: 0, height: 0 }}
-                                        transition={{ duration: 0.3 }}
-                                        className="border-t border-slate-100 dark:border-slate-700"
+                                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                                        className="border-t border-slate-100 dark:border-slate-700 overflow-hidden"
                                     >
                                         <div className="p-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6 bg-slate-50/50 dark:bg-slate-800/50">
                                             {category.items.map((item, idx) => (
-                                                <motion.div
+                                                <div
                                                     key={idx}
-                                                    initial={{ opacity: 0, y: 20 }}
-                                                    animate={{ opacity: 1, y: 0 }}
-                                                    transition={{ delay: idx * 0.1 }}
                                                     className="bg-white dark:bg-slate-700 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-600/50 hover:border-brand-200 dark:hover:border-brand-500/30 transition-colors"
                                                 >
                                                     <h4 className="font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
@@ -169,10 +162,17 @@ const Workshops = () => {
                                                     <p className="text-sm text-slate-600 dark:text-slate-300">
                                                         {item.desc}
                                                     </p>
-                                                </motion.div>
+                                                </div>
                                             ))}
                                             <div className="md:col-span-2 lg:col-span-3 mt-4 text-center">
-                                                <button className="px-8 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl font-bold transition-colors shadow-lg shadow-brand-500/20">
+                                                <button
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        // Aquí iría la lógica para abrir el enlace
+                                                        console.log("Solicitar información");
+                                                    }}
+                                                    className="px-8 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl font-bold transition-colors shadow-lg shadow-brand-500/20"
+                                                >
                                                     Solicitar Información sobre estos Talleres
                                                 </button>
                                             </div>
@@ -180,7 +180,7 @@ const Workshops = () => {
                                     </motion.div>
                                 )}
                             </AnimatePresence>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
             </div>

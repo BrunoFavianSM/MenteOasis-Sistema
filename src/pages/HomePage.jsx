@@ -6,6 +6,7 @@ import Services from '../components/webpage/Services';
 import Workshops from '../components/webpage/Workshops';
 import SocialWork from '../components/webpage/SocialWork';
 import Events from '../components/webpage/Events';
+import Galeria from '../components/webpage/Galeria';
 import LocationMap from '../components/webpage/LocationMap';
 import ContactForm from '../components/webpage/ContactForm';
 import Footer from '../components/webpage/Footer';
@@ -21,6 +22,7 @@ const HomePage = () => {
             <Workshops />
             <SocialWork />
             <Events />
+            <Galeria />
             <LocationMap />
             <ContactForm />
             <Footer />

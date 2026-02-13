@@ -1,5 +1,5 @@
 import React from 'react';
-import { Facebook, Instagram, Mail, Phone, MapPin, Brain, ExternalLink } from 'lucide-react';
+import { Facebook, Instagram, Mail, Phone, MapPin, ExternalLink } from 'lucide-react';
 
 const Footer = () => {
     return (
@@ -9,7 +9,7 @@ const Footer = () => {
                     {/* Brand */}
                     <div>
                         <div className="flex items-center gap-2 text-white font-bold text-2xl mb-6">
-                            <Brain className="w-8 h-8 text-brand-400" />
+                            <img src="/logo.webp" alt="MenteOasis Logo" className="w-12 h-12 object-contain" />
                             <span>MenteOasis</span>
                         </div>
                         <p className="text-slate-400 leading-relaxed">
@@ -43,7 +43,7 @@ const Footer = () => {
                             </li>
                             <li className="flex items-center gap-3">
                                 <Mail className="w-5 h-5 text-brand-400" />
-                                <span>contacto@menteoasis.com</span>
+                                <span>psicoseverino@gmail.com</span>
                             </li>
                         </ul>
                     </div>

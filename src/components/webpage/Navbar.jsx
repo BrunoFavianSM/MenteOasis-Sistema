@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Brain, LogIn, Sun, Moon, Volume2, VolumeX } from 'lucide-react';
+import { Menu, X, LogIn, Sun, Moon, Volume2, VolumeX } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../../context/ThemeContext';
@@ -32,7 +32,7 @@ const Navbar = () => {
         <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'}`}>
             <div className="container mx-auto px-6 flex justify-between items-center">
                 <a href="#" className="flex items-center gap-2 text-2xl font-bold text-brand-700 dark:text-brand-400 transition-colors">
-                    <Brain className="w-8 h-8" />
+                    <img src="/logo.webp" alt="MenteOasis Logo" className="w-12 h-12 object-contain" />
                     <span>MenteOasis</span>
                 </a>
 
@@ -67,7 +67,7 @@ const Navbar = () => {
                     {/* Theme Toggle Button */}
                     <button
                         onClick={toggleTheme}
-                        className="p-2 rounded-xl transition-all duration-300 border border-slate-200 dark:border-slate-700 hover:border-brand-300 dark:hover:border-brand-500 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 flex items-center justify-center gap-2"
+                        className="p-2 rounded-xl transition-all duration-300 border border-slate-200 dark:border-slate-700 hover:border-brand-300 dark:hover:border-brand-500 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 flex items-center justify-center gap-2 lg:w-28"
                         title={theme === 'dark' ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
                     >
                         {theme === 'dark' ? (

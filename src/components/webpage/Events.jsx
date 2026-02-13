@@ -68,7 +68,7 @@ const Events = () => {
                     </motion.div>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-32">
                     {events.map((event, index) => (
                         <motion.div
                             key={index}
@@ -81,88 +81,76 @@ const Events = () => {
                             {/* Card Glow Effect */}
                             <div className="absolute -inset-1 bg-gradient-to-r from-brand-500 to-indigo-600 rounded-[2rem] blur opacity-25 group-hover:opacity-60 transition duration-1000 group-hover:duration-200" />
 
-                            <div className="relative flex flex-col md:flex-row bg-slate-900/80 backdrop-blur-2xl border border-white/10 rounded-[2rem] overflow-hidden shadow-2xl h-full">
-                                {/* Image Section */}
-                                <div className="md:w-2/5 h-64 md:h-auto overflow-hidden relative">
+                            <div className="flex flex-col bg-slate-900/80 backdrop-blur-2xl border border-white/10 rounded-[2rem] overflow-hidden shadow-2xl h-full">
+                                {/* Image Section - TOP */}
+                                <div className="h-56 overflow-hidden relative">
                                     <img
                                         src={event.image}
                                         alt={event.title}
                                         className="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-700"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent md:bg-gradient-to-r" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
 
                                     {/* Date Badge over Image */}
-                                    <div className="absolute top-6 left-6">
-                                        <div className="bg-brand-500/90 backdrop-blur-md text-white font-black px-4 py-2 rounded-2xl shadow-xl flex flex-col items-center">
-                                            <span className="text-sm uppercase">
+                                    <div className="absolute top-4 right-4">
+                                        <div className="bg-brand-500/90 backdrop-blur-md text-white font-black px-3 py-1.5 rounded-xl shadow-xl flex flex-col items-center">
+                                            <span className="text-xs uppercase">
                                                 {event.date.includes('Abril') ? 'ABR' :
                                                     event.date.includes('Septiembre') ? 'SEP' :
                                                         event.date.includes('Octubre') ? 'OCT' : 'EVENTO'}
                                             </span>
-                                            <span className="text-2xl -mt-1">{event.date.split(' ')[0]}</span>
+                                            <span className="text-xl -mt-1">{event.date.split(' ')[0]}</span>
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* Content Section */}
-                                <div className="md:w-3/5 p-6 md:p-8 flex flex-col justify-center">
+                                {/* Content Section - BOTTOM */}
+                                <div className="p-6 flex flex-col flex-grow">
+                                    {/* Title */}
                                     <div className="mb-4">
-                                        <h3 className="text-2xl md:text-3xl font-bold mb-3 group-hover:text-brand-400 transition-colors duration-300 leading-tight">
+                                        <h3 className="text-xl font-bold mb-2 group-hover:text-brand-400 transition-colors duration-300 leading-tight">
                                             {event.title}
                                         </h3>
-                                        <div className="h-1 w-12 bg-brand-500 rounded-full group-hover:w-24 transition-all duration-500" />
+                                        <div className="h-1 w-12 bg-brand-500 rounded-full group-hover:w-20 transition-all duration-500" />
                                     </div>
 
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                                        <div className="flex items-center gap-3 group/item">
-                                            <div className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center group-hover/item:bg-brand-500/20 transition-colors">
-                                                <Calendar className="w-4 h-4 text-brand-400" />
-                                            </div>
-                                            <div className="flex flex-col">
-                                                <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Fecha</span>
-                                                <span className="text-sm font-semibold">{event.date}</span>
-                                            </div>
+                                    {/* Info */}
+                                    <div className="space-y-3 mb-6 flex-grow">
+                                        <div className="flex items-center gap-3">
+                                            <Calendar className="w-4 h-4 text-brand-400 shrink-0" />
+                                            <span className="text-sm text-slate-300">{event.date}</span>
                                         </div>
-                                        <div className="flex items-center gap-3 group/item">
-                                            <div className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center group-hover/item:bg-brand-500/20 transition-colors">
-                                                <Clock className="w-4 h-4 text-brand-400" />
-                                            </div>
-                                            <div className="flex flex-col">
-                                                <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Hora</span>
-                                                <span className="text-sm font-semibold">{event.time}</span>
-                                            </div>
+                                        <div className="flex items-center gap-3">
+                                            <Clock className="w-4 h-4 text-brand-400 shrink-0" />
+                                            <span className="text-sm text-slate-300">{event.time}</span>
                                         </div>
-                                        <div className="flex items-center gap-3 group/item sm:col-span-2">
-                                            <div className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center group-hover/item:bg-brand-500/20 transition-colors">
-                                                <MapPin className="w-4 h-4 text-brand-400" />
-                                            </div>
-                                            <div className="flex flex-col">
-                                                <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Ubicación</span>
-                                                <span className="text-sm font-semibold">{event.location}</span>
-                                            </div>
+                                        <div className="flex items-center gap-3">
+                                            <MapPin className="w-4 h-4 text-brand-400 shrink-0" />
+                                            <span className="text-sm text-slate-300">{event.location}</span>
                                         </div>
                                     </div>
 
+                                    {/* Button */}
                                     <motion.a
                                         whileHover={{ scale: 1.02 }}
                                         whileTap={{ scale: 0.98 }}
                                         href={event.formUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="w-full py-4 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white rounded-2xl font-black shadow-xl shadow-brand-500/20 flex items-center justify-center gap-3 transition-all duration-300 group/btn"
+                                        className="w-full py-3 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white rounded-xl font-bold shadow-lg shadow-brand-500/20 flex items-center justify-center gap-2 transition-all duration-300 group/btn mt-auto"
                                     >
-                                        Inscribirse Ahora
-                                        <ExternalLink className="w-5 h-5 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+                                        Inscribirse
+                                        <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
                                     </motion.a>
                                 </div>
                             </div>
                         </motion.div>
                     ))}
                 </div>
+
             </div>
         </section>
     );
 };
 
 export default Events;
-

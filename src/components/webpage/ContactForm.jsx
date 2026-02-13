@@ -265,8 +265,8 @@ const ContactForm = () => {
                                     </div>
                                     <div>
                                         <h4 className="font-semibold text-slate-900 dark:text-white mb-1 transition-colors duration-300">Email</h4>
-                                        <a href="mailto:contacto@menteoasis.com" className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition">
-                                            contacto@menteoasis.com
+                                        <a href="mailto:psicoseverino@gmail.com" className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition">
+                                            psicoseverino@gmail.com
                                         </a>
                                     </div>
                                 </div>
