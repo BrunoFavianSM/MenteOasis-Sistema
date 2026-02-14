@@ -11,6 +11,7 @@ import LocationMap from '../components/webpage/LocationMap';
 import ContactForm from '../components/webpage/ContactForm';
 import Footer from '../components/webpage/Footer';
 import WhatsAppButton from '../components/webpage/WhatsAppButton';
+import Testimonials from '../components/webpage/Testimonials';
 
 const HomePage = () => {
     return (
@@ -19,6 +20,7 @@ const HomePage = () => {
             <Hero />
             <About />
             <Services />
+            <Testimonials />
             <Workshops />
             <SocialWork />
             <Events />

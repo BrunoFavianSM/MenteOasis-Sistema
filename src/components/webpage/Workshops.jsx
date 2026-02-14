@@ -84,28 +84,20 @@ const Workshops = () => {
     };
 
     return (
-        <section id="workshops" className="py-24 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950 relative overflow-hidden transition-colors duration-300">
-            {/* Decorative Elements */}
-            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-200/40 dark:bg-brand-900/10 rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-200/40 dark:bg-indigo-900/10 rounded-full blur-[120px] pointer-events-none" />
-
-            <div className="container mx-auto px-6 relative z-10">
-                <div className="text-center max-w-3xl mx-auto mb-16">
+        <section id="workshops" className="py-24 bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
+            <div className="container mx-auto px-6">
+                <div className="text-center max-w-3xl mx-auto mb-20">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-100 dark:bg-brand-900/50 text-brand-700 dark:text-brand-300 rounded-full text-sm font-bold mb-4">
-                            <Star className="w-4 h-4 fill-brand-700 dark:fill-brand-300" />
-                            <span>Programas Especializados</span>
-                        </div>
-                        <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6 tracking-tight">
-                            Talleres y Experiencias
+                        <span className="text-brand-600 dark:text-brand-400 font-bold tracking-widest uppercase text-xs mb-4 block">Experiencias y Aprendizaje</span>
+                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight">
+                            Talleres Especializados
                         </h2>
-                        <p className="text-lg text-slate-600 dark:text-slate-300">
-                            Descubre nuestros espacios diseñados para cada etapa y necesidad.
-                            <span className="font-semibold text-brand-600 dark:text-brand-400"> Haz clic en una categoría para ver más.</span>
+                        <p className="text-lg text-slate-600 dark:text-slate-400">
+                            Espacios diseñados para el crecimiento personal y grupal.
                         </p>
                     </motion.div>
                 </div>
@@ -115,27 +107,32 @@ const Workshops = () => {
                         <div
                             key={category.id}
                             onClick={() => toggleCategory(category.id)}
-                            className={`group cursor-pointer rounded-3xl overflow-hidden border transition-all duration-300 ${expandedCategory === category.id
-                                ? 'col-span-1 md:col-span-2 lg:col-span-3 bg-white dark:bg-slate-800 shadow-2xl ring-2 ring-brand-500/20'
-                                : 'bg-white dark:bg-slate-900 shadow-lg hover:shadow-xl border-slate-100 dark:border-slate-800'
+                            className={`group cursor-pointer rounded-[2rem] overflow-hidden transition-all duration-300 border border-transparent ${expandedCategory === category.id
+                                ? 'col-span-1 md:col-span-2 lg:col-span-3 bg-white dark:bg-slate-950 ring-1 ring-slate-200 dark:ring-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none'
+                                : 'bg-white dark:bg-slate-950 hover:bg-white dark:hover:bg-slate-900 hover:shadow-lg hover:shadow-slate-200/50 dark:hover:shadow-none border-slate-100 dark:border-slate-800'
                                 }`}
                         >
-                            <div className="relative p-6">
-                                <div className="flex justify-between items-center">
-                                    <div className="flex items-center gap-4">
-                                        <div className={`inline-flex p-3 rounded-xl ${category.color} bg-opacity-20`}>
+                            <div className="relative p-8">
+                                <div className="flex justify-between items-start gap-4">
+                                    <div className="flex items-start gap-6">
+                                        <div className={`shrink-0 p-4 rounded-2xl bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white group-hover:bg-brand-600 group-hover:text-white transition-colors duration-300`}>
                                             {category.icon}
                                         </div>
-                                        <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">
-                                            {category.title}
-                                        </h3>
+                                        <div>
+                                            <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-2 leading-tight">
+                                                {category.title}
+                                            </h3>
+                                            <p className="text-slate-500 dark:text-slate-400 text-sm group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">
+                                                {category.description}
+                                            </p>
+                                        </div>
                                     </div>
                                     <motion.div
                                         animate={{ rotate: expandedCategory === category.id ? 180 : 0 }}
                                         transition={{ duration: 0.3 }}
-                                        className="bg-slate-100 dark:bg-slate-700 p-2 rounded-full text-slate-600 dark:text-slate-300"
+                                        className="bg-slate-50 dark:bg-slate-900 p-2 rounded-full text-slate-400 dark:text-slate-500"
                                     >
-                                        <ChevronDown className="w-6 h-6" />
+                                        <ChevronDown className="w-5 h-5" />
                                     </motion.div>
                                 </div>
                             </div>
@@ -147,19 +144,19 @@ const Workshops = () => {
                                         animate={{ opacity: 1, height: "auto" }}
                                         exit={{ opacity: 0, height: 0 }}
                                         transition={{ duration: 0.3, ease: "easeInOut" }}
-                                        className="border-t border-slate-100 dark:border-slate-700 overflow-hidden"
+                                        className="border-t border-slate-100 dark:border-slate-800"
                                     >
-                                        <div className="p-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6 bg-slate-50/50 dark:bg-slate-800/50">
+                                        <div className="p-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6 bg-slate-50/50 dark:bg-slate-900/50">
                                             {category.items.map((item, idx) => (
                                                 <div
                                                     key={idx}
-                                                    className="bg-white dark:bg-slate-700 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-600/50 hover:border-brand-200 dark:hover:border-brand-500/30 transition-colors"
+                                                    className="bg-white dark:bg-slate-950 p-6 rounded-2xl border border-slate-100 dark:border-slate-800"
                                                 >
                                                     <h4 className="font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
-                                                        <div className="w-2 h-2 rounded-full bg-brand-500" />
+                                                        <div className="w-1.5 h-1.5 rounded-full bg-brand-600 dark:bg-brand-400" />
                                                         {item.title}
                                                     </h4>
-                                                    <p className="text-sm text-slate-600 dark:text-slate-300">
+                                                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                                                         {item.desc}
                                                     </p>
                                                 </div>
@@ -168,12 +165,11 @@ const Workshops = () => {
                                                 <button
                                                     onClick={(e) => {
                                                         e.stopPropagation();
-                                                        // Aquí iría la lógica para abrir el enlace
                                                         console.log("Solicitar información");
                                                     }}
-                                                    className="px-8 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl font-bold transition-colors shadow-lg shadow-brand-500/20"
+                                                    className="px-8 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-full font-bold hover:opacity-90 transition-opacity"
                                                 >
-                                                    Solicitar Información sobre estos Talleres
+                                                    Solicitar Información
                                                 </button>
                                             </div>
                                         </div>

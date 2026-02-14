@@ -47,12 +47,12 @@ const Services = () => {
     ];
 
     return (
-        <section id="services" className="py-20 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+        <section id="services" className="py-24 bg-white dark:bg-slate-950 transition-colors duration-300">
             <div className="container mx-auto px-6">
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4 transition-colors duration-300">Nuestros Servicios</h2>
-                    <p className="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto transition-colors duration-300">
-                        Ofrecemos diversas modalidades de consulta adaptadas a tus necesidades.
+                <div className="text-center mb-20">
+                    <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight">Nuestros Servicios</h2>
+                    <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                        Soluciones profesionales adaptadas a tu momento de vida.
                     </p>
                 </div>
 
@@ -64,13 +64,15 @@ const Services = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            className="bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border border-slate-100 dark:border-slate-800"
+                            className="group bg-slate-50 dark:bg-slate-900 p-8 rounded-[2rem] hover:bg-white dark:hover:bg-slate-800 border border-transparent hover:border-slate-200 dark:hover:border-slate-700 transition-all duration-300"
                         >
-                            <div className="w-14 h-14 bg-brand-50 dark:bg-slate-800 rounded-xl flex items-center justify-center mb-6 transition-colors duration-300">
-                                {service.icon}
+                            <div className="w-14 h-14 bg-white dark:bg-slate-800 group-hover:bg-brand-50 dark:group-hover:bg-brand-900/20 rounded-2xl flex items-center justify-center mb-8 shadow-sm group-hover:shadow-none transition-all duration-300 border border-slate-100 dark:border-slate-700 group-hover:border-brand-100 dark:group-hover:border-brand-900/50">
+                                {React.cloneElement(service.icon, { className: "w-7 h-7 text-slate-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors" })}
                             </div>
-                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 transition-colors duration-300">{service.title}</h3>
-                            <p className="text-slate-600 dark:text-slate-300 transition-colors duration-300">{service.description}</p>
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 leading-tight">{service.title}</h3>
+                            <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">
+                                {service.description}
+                            </p>
                         </motion.div>
                     ))}
                 </div>

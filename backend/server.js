@@ -120,6 +120,80 @@ app.get('/api/auth/verify', async (req, res) => {
     }
 });
 
+
+
+// =====================================================
+// TESTIMONIALS ROUTES
+// =====================================================
+
+// GET Public Testimonials (Approved only)
+app.get('/api/testimonials', async (req, res) => {
+    try {
+        const [rows] = await pool.execute(
+            'SELECT * FROM testimonials WHERE approved = TRUE ORDER BY created_at DESC'
+        );
+        res.json(rows);
+    } catch (error) {
+        console.error('Error fetching testimonials:', error);
+        res.status(500).json({ message: 'Error al obtener testimonios' });
+    }
+});
+
+// GET All Testimonials (Admin only - Protected)
+// TODO: Add proper middleware protection in future. For now, client-side check + knowledge of endpoint.
+app.get('/api/admin/testimonials', async (req, res) => {
+    try {
+        const [rows] = await pool.execute('SELECT * FROM testimonials ORDER BY created_at DESC');
+        res.json(rows);
+    } catch (error) {
+        console.error('Error fetching admin testimonials:', error);
+        res.status(500).json({ message: 'Error al obtener testimonios' });
+    }
+});
+
+// POST Create Testimonial (Admin or Public via form)
+app.post('/api/testimonials', async (req, res) => {
+    try {
+        const { patient_name, role, content, approved = false } = req.body;
+        await pool.execute(
+            'INSERT INTO testimonials (patient_name, role, content, approved) VALUES (?, ?, ?, ?)',
+            [patient_name, role || 'Paciente', content, approved]
+        );
+        res.status(201).json({ message: 'Testimonio creado exitosamente' });
+    } catch (error) {
+        console.error('Error creating testimonial:', error);
+        res.status(500).json({ message: 'Error al crear testimonio' });
+    }
+});
+
+// PUT Update Testimonial (Approve/Edit)
+app.put('/api/testimonials/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { patient_name, role, content, approved } = req.body;
+        await pool.execute(
+            'UPDATE testimonials SET patient_name = ?, role = ?, content = ?, approved = ? WHERE id = ?',
+            [patient_name, role, content, approved, id]
+        );
+        res.json({ message: 'Testimonio actualizado' });
+    } catch (error) {
+        console.error('Error updating testimonial:', error);
+        res.status(500).json({ message: 'Error al actualizar testimonio' });
+    }
+});
+
+// DELETE Testimonial
+app.delete('/api/testimonials/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        await pool.execute('DELETE FROM testimonials WHERE id = ?', [id]);
+        res.json({ message: 'Testimonio eliminado' });
+    } catch (error) {
+        console.error('Error deleting testimonial:', error);
+        res.status(500).json({ message: 'Error al eliminar testimonio' });
+    }
+});
+
 // =====================================================
 // DEBUG ROUTE: Ver usuarios (temporal)
 // =====================================================

@@ -58,10 +58,7 @@ const SocialWork = () => {
 
 
     return (
-        <section id="social-work" className="py-24 bg-teal-950 dark:bg-slate-900 text-white relative overflow-hidden transition-colors duration-300">
-            {/* Texture Overlay */}
-            <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#115e59_1px,transparent_1px)] dark:bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:16px_16px]" />
-
+        <section id="social-work" className="py-24 bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-white relative overflow-hidden transition-colors duration-300">
             <div className="container mx-auto px-6 relative z-10">
                 <div className="text-center max-w-3xl mx-auto mb-20">
                     <motion.div
@@ -69,14 +66,14 @@ const SocialWork = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-800/50 dark:bg-slate-800/50 rounded-full text-teal-200 dark:text-brand-300 text-sm font-semibold mb-6 border border-teal-700 dark:border-slate-700 backdrop-blur-sm transition-colors duration-300">
-                            <Star className="w-4 h-4 text-yellow-400" />
-                            <span>Compromiso Social MenteOasis</span>
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 rounded-full text-slate-900 dark:text-white text-xs font-bold mb-6 border border-slate-200 dark:border-slate-800 shadow-sm transition-colors duration-300 uppercase tracking-wider">
+                            <Star className="w-3 h-3 text-brand-600 dark:text-brand-400" />
+                            <span>Compromiso Social</span>
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white tracking-tight">
                             Responsabilidad Social
                         </h2>
-                        <p className="text-xl text-teal-100/90 dark:text-slate-300 leading-relaxed font-light transition-colors duration-300">
+                        <p className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed font-light transition-colors duration-300">
                             Más que una empresa, somos un agente de cambio. Nuestro área de Responsabilidad Social
                             se dedica al servicio directo, creando impacto tangible en la comunidad.
                         </p>
@@ -110,15 +107,15 @@ const ImageSlideshow = ({ images, isActive }) => {
     }, [isActive, images.length]);
 
     return (
-        <div className="absolute inset-0 z-0 bg-slate-900">
+        <div className="absolute inset-0 z-0 bg-slate-200 dark:bg-slate-900">
             <AnimatePresence mode="popLayout">
                 {isActive && (
                     <motion.img
                         key={currentIndex}
                         src={images[currentIndex]}
                         alt="Activity evidence"
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 0.6, x: 0 }}
+                        initial={{ opacity: 0, scale: 1.1 }}
+                        animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.5 }}
                         className="absolute inset-0 w-full h-full object-cover"
@@ -126,7 +123,7 @@ const ImageSlideshow = ({ images, isActive }) => {
                 )}
             </AnimatePresence>
             {/* Overlay gradient to ensure text readability */}
-            <div className={`absolute inset-0 bg-gradient-to-t from-teal-950 via-teal-900/80 to-teal-900/40 dark:from-slate-950 dark:via-slate-900/80 dark:to-slate-900/40 transition-opacity duration-300 ${isActive ? 'opacity-90' : 'opacity-100'}`} />
+            <div className={`absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent transition-opacity duration-300 ${isActive ? 'opacity-90' : 'opacity-0'}`} />
         </div>
     );
 };
@@ -144,31 +141,23 @@ const CardWithSlideshow = ({ activity, index }) => {
             onHoverStart={() => setIsHovered(true)}
             onHoverEnd={() => setIsHovered(false)}
             onTouchStart={() => setIsHovered(true)} // Handle mobile tap
-            className="group relative p-8 rounded-3xl bg-teal-900/40 dark:bg-slate-800/40 border border-teal-800 dark:border-slate-700 overflow-hidden flex flex-col items-center text-center h-full min-h-[350px]"
+            className="group relative p-8 rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col items-center text-center h-full min-h-[400px] shadow-sm hover:shadow-xl transition-all duration-500"
         >
             <ImageSlideshow images={activity.images} isActive={isHovered} />
 
-            <div className="relative z-10 flex flex-col h-full items-center transition-transform duration-300 group-hover:-translate-y-2">
-                <div className="w-16 h-16 bg-teal-800/80 dark:bg-slate-700/80 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6 text-white border border-teal-700 dark:border-slate-600 transition-transform group-hover:scale-110 shadow-lg">
+            <div className="relative z-10 flex flex-col h-full items-center justify-center transition-all duration-500 group-hover:justify-end">
+                <div className={`w-16 h-16 bg-brand-50 dark:bg-slate-800 rounded-2xl flex items-center justify-center mb-6 text-brand-600 dark:text-white border border-brand-100 dark:border-slate-700 transition-all duration-500 shadow-sm ${isHovered ? 'scale-0 opacity-0 h-0 mb-0' : 'scale-100 opacity-100'}`}>
                     {activity.icon}
                 </div>
-                <h3 className="text-xl font-bold mb-4 text-white group-hover:text-teal-300 dark:group-hover:text-brand-300 transition-colors">
+                <h3 className={`text-2xl font-bold mb-4 text-slate-900 dark:text-white transition-colors duration-300 ${isHovered ? 'text-white translate-y-0' : 'translate-y-0'}`}>
                     {activity.title}
                 </h3>
-                <p className={`text-teal-100/90 dark:text-slate-300 text-sm leading-relaxed mb-6 flex-grow transition-opacity duration-300 ${isHovered ? 'opacity-100 font-medium' : 'opacity-80'}`}>
+                <p className={`text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6 flex-grow transition-all duration-500 ${isHovered ? 'opacity-100 text-slate-200 max-h-40' : 'opacity-100 max-h-40'}`}>
                     {activity.description}
                 </p>
 
-                <div className={`flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-teal-300 dark:text-brand-400 transition-all duration-300 ${isHovered ? 'scale-110' : 'opacity-60'}`}>
-                    {isHovered ? (
-                        <>
-                            <ArrowRight className="w-4 h-4" /> Ver Galería
-                        </>
-                    ) : (
-                        <>
-                            <Star className="w-3 h-3" /> Acción Social
-                        </>
-                    )}
+                <div className={`flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400 transition-all duration-300 ${isHovered ? 'text-white translate-y-0' : 'translate-y-4 opacity-0'}`}>
+                    <ArrowRight className="w-4 h-4" /> Ver Galería
                 </div>
             </div>
         </motion.div>

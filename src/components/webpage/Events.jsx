@@ -39,12 +39,8 @@ const Events = () => {
     ];
 
     return (
-        <section id="events" className="py-24 bg-slate-950 text-white relative overflow-hidden transition-colors duration-300">
-            {/* Background Animations */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none">
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-600/20 rounded-full blur-[120px] animate-pulse" />
-                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-600/20 rounded-full blur-[120px] animate-pulse transition-all duration-1000 delay-700" />
-            </div>
+        <section id="events" className="py-24 bg-white dark:bg-slate-950 transition-colors duration-300 relative overflow-hidden">
+            {/* Clean Background - No Animations */}
 
             <div className="container mx-auto px-6 relative z-10">
                 <div className="text-center mb-20">
@@ -53,15 +49,15 @@ const Events = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 font-bold tracking-widest text-xs mb-6 uppercase">
+                        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-100 dark:bg-brand-500/10 border border-brand-200 dark:border-brand-500/20 text-brand-700 dark:text-brand-400 font-bold tracking-widest text-xs mb-6 uppercase">
                             <Sparkles className="w-4 h-4" />
                             Próximamente
                         </span>
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight">
-                            Eventos <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-indigo-400">Futuros</span>
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">
+                            Eventos <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-indigo-600 dark:from-brand-400 dark:to-indigo-400">Futuros</span>
                         </h2>
                         <div className="w-24 h-1.5 bg-gradient-to-r from-brand-500 to-indigo-500 mx-auto rounded-full mb-8" />
-                        <p className="text-slate-400 text-lg max-w-2xl mx-auto font-medium leading-relaxed">
+                        <p className="text-slate-600 dark:text-slate-400 text-lg max-w-2xl mx-auto font-medium leading-relaxed">
                             Participa en nuestras actividades diseñadas para tu bienestar.
                             Inscríbete fácilmente a través de nuestro formulario en línea.
                         </p>
@@ -81,7 +77,7 @@ const Events = () => {
                             {/* Card Glow Effect */}
                             <div className="absolute -inset-1 bg-gradient-to-r from-brand-500 to-indigo-600 rounded-[2rem] blur opacity-25 group-hover:opacity-60 transition duration-1000 group-hover:duration-200" />
 
-                            <div className="flex flex-col bg-slate-900/80 backdrop-blur-2xl border border-white/10 rounded-[2rem] overflow-hidden shadow-2xl h-full">
+                            <div className="flex flex-col bg-white dark:bg-slate-900/80 backdrop-blur-2xl border border-slate-100 dark:border-white/10 rounded-[2rem] overflow-hidden shadow-xl shadow-slate-200/50 dark:shadow-2xl h-full">
                                 {/* Image Section - TOP */}
                                 <div className="h-56 overflow-hidden relative">
                                     <img
@@ -89,11 +85,11 @@ const Events = () => {
                                         alt={event.title}
                                         className="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-700"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
 
                                     {/* Date Badge over Image */}
                                     <div className="absolute top-4 right-4">
-                                        <div className="bg-brand-500/90 backdrop-blur-md text-white font-black px-3 py-1.5 rounded-xl shadow-xl flex flex-col items-center">
+                                        <div className="bg-white/90 dark:bg-brand-500/90 backdrop-blur-md text-brand-700 dark:text-white font-black px-3 py-1.5 rounded-xl shadow-xl flex flex-col items-center">
                                             <span className="text-xs uppercase">
                                                 {event.date.includes('Abril') ? 'ABR' :
                                                     event.date.includes('Septiembre') ? 'SEP' :
@@ -108,7 +104,7 @@ const Events = () => {
                                 <div className="p-6 flex flex-col flex-grow">
                                     {/* Title */}
                                     <div className="mb-4">
-                                        <h3 className="text-xl font-bold mb-2 group-hover:text-brand-400 transition-colors duration-300 leading-tight">
+                                        <h3 className="text-xl font-bold mb-2 text-slate-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors duration-300 leading-tight">
                                             {event.title}
                                         </h3>
                                         <div className="h-1 w-12 bg-brand-500 rounded-full group-hover:w-20 transition-all duration-500" />
@@ -117,16 +113,16 @@ const Events = () => {
                                     {/* Info */}
                                     <div className="space-y-3 mb-6 flex-grow">
                                         <div className="flex items-center gap-3">
-                                            <Calendar className="w-4 h-4 text-brand-400 shrink-0" />
-                                            <span className="text-sm text-slate-300">{event.date}</span>
+                                            <Calendar className="w-4 h-4 text-brand-600 dark:text-brand-400 shrink-0" />
+                                            <span className="text-sm text-slate-600 dark:text-slate-300">{event.date}</span>
                                         </div>
                                         <div className="flex items-center gap-3">
-                                            <Clock className="w-4 h-4 text-brand-400 shrink-0" />
-                                            <span className="text-sm text-slate-300">{event.time}</span>
+                                            <Clock className="w-4 h-4 text-brand-600 dark:text-brand-400 shrink-0" />
+                                            <span className="text-sm text-slate-600 dark:text-slate-300">{event.time}</span>
                                         </div>
                                         <div className="flex items-center gap-3">
-                                            <MapPin className="w-4 h-4 text-brand-400 shrink-0" />
-                                            <span className="text-sm text-slate-300">{event.location}</span>
+                                            <MapPin className="w-4 h-4 text-brand-600 dark:text-brand-400 shrink-0" />
+                                            <span className="text-sm text-slate-600 dark:text-slate-300">{event.location}</span>
                                         </div>
                                     </div>
 
@@ -137,7 +133,7 @@ const Events = () => {
                                         href={event.formUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="w-full py-3 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white rounded-xl font-bold shadow-lg shadow-brand-500/20 flex items-center justify-center gap-2 transition-all duration-300 group/btn mt-auto"
+                                        className="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl font-bold shadow-lg shadow-brand-500/20 flex items-center justify-center gap-2 transition-all duration-300 group/btn mt-auto"
                                     >
                                         Inscribirse
                                         <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
