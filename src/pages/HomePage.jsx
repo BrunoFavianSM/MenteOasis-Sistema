@@ -15,7 +15,7 @@ import Testimonials from '../components/webpage/Testimonials';
 
 const HomePage = () => {
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans text-slate-800 dark:text-slate-200 transition-colors duration-300">
+        <div className="min-h-screen bg-slate-50 dark:bg-transparent font-sans text-slate-800 dark:text-slate-200 transition-colors duration-300">
             <Navbar />
             <Hero />
             <About />

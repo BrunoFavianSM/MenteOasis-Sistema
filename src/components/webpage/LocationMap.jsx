@@ -1,14 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapPin, Navigation } from 'lucide-react';
 import { motion } from 'framer-motion';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
+const FALLBACK = {
+    location_address_line1: 'Av. E-9, Av. Mariscal Cáceres 43',
+    location_address_line2: 'Talara 20811, Perú',
+    location_maps_url: 'https://www.google.com/maps/dir//Servicios+psicol%C3%B3gicos+Mente+Oasis/@-4.5811073,-81.2682757,17z',
+    location_maps_embed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.0719242525065!2d-81.26827569999999!3d-4.5811073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x903645d0a064cb55%3A0xfb62cf4e9b7eae95!2sServicios%20psicol%C3%B3gicos%20Mente%20Oasis!5e0!3m2!1ses-419!2spe!4v1770138731367!5m2!1ses-419!2spe',
+};
+
 const LocationMap = () => {
+    const [content, setContent] = useState(FALLBACK);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await fetch(`${API_URL}/api/content/location`);
+                if (res.ok) {
+                    const data = await res.json();
+                    setContent(prev => ({ ...prev, ...data }));
+                }
+            } catch (error) {
+                console.log('Using fallback location data');
+            }
+        };
+        fetchData();
+    }, []);
+
     const openGoogleMaps = () => {
-        window.open('https://www.google.com/maps/dir//Servicios+psicol%C3%B3gicos+Mente+Oasis/@-4.5811073,-81.2682757,17z', '_blank');
+        window.open(content.location_maps_url, '_blank');
     };
 
     return (
-        <section className="py-20 bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
+        <section className="py-20 bg-slate-50 dark:bg-transparent transition-colors duration-300">
             <div className="container mx-auto px-6">
                 {/* Header */}
                 <motion.div
@@ -37,10 +63,10 @@ const LocationMap = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                         >
-                            <div className="bg-white dark:bg-slate-800 p-4 rounded-3xl shadow-xl shadow-slate-200/50 dark:shadow-xl dark:shadow-slate-900/50 overflow-hidden border border-slate-100 dark:border-slate-700 transition-colors duration-300 h-full">
+                            <div className="bg-white dark:bg-slate-900/60 backdrop-blur-md p-4 rounded-3xl shadow-xl shadow-slate-200/50 dark:shadow-xl dark:shadow-slate-900/50 overflow-hidden border border-slate-100 dark:border-slate-700 transition-colors duration-300 h-full">
                                 <div className="w-full h-[400px] lg:h-[550px] rounded-2xl overflow-hidden relative bg-slate-100 dark:bg-slate-700 group">
                                     <iframe
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.0719242525065!2d-81.26827569999999!3d-4.5811073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x903645d0a064cb55%3A0xfb62cf4e9b7eae95!2sServicios%20psicol%C3%B3gicos%20Mente%20Oasis!5e0!3m2!1ses-419!2spe!4v1770138731367!5m2!1ses-419!2spe"
+                                        src={content.location_maps_embed}
                                         width="100%"
                                         height="100%"
                                         style={{ border: 0 }}
@@ -71,9 +97,7 @@ const LocationMap = () => {
                             viewport={{ once: true }}
                         >
                             {/* Address Card */}
-                            <div className="bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 p-8 rounded-[2rem] text-slate-800 dark:text-white shadow-lg shadow-slate-200/50 dark:shadow-none transition-all hover:shadow-xl hover:scale-[1.02] h-full flex flex-col justify-center relative overflow-hidden group">
-                                {/* Clean Background */}
-
+                            <div className="bg-slate-50 dark:bg-slate-900/60 backdrop-blur-md border border-slate-100 dark:border-slate-700 p-8 rounded-[2rem] text-slate-800 dark:text-white shadow-lg shadow-slate-200/50 dark:shadow-none transition-all hover:shadow-xl hover:scale-[1.02] h-full flex flex-col justify-center relative overflow-hidden group">
                                 <div className="flex items-start gap-4 relative z-10">
                                     <div className="w-14 h-14 bg-brand-50 dark:bg-white/20 rounded-2xl flex items-center justify-center flex-shrink-0 text-brand-600 dark:text-white">
                                         <MapPin className="w-7 h-7" />
@@ -81,15 +105,12 @@ const LocationMap = () => {
                                     <div>
                                         <h3 className="font-bold text-2xl mb-3 text-slate-800 dark:text-white">Visítanos</h3>
                                         <p className="text-slate-600 dark:text-brand-50 leading-relaxed text-lg">
-                                            Av. E-9, Av. Mariscal Cáceres 43<br />
-                                            Talara 20811, Perú
+                                            {content.location_address_line1}<br />
+                                            {content.location_address_line2}
                                         </p>
                                     </div>
                                 </div>
                             </div>
-
-
-
                         </motion.div>
                     </div>
                 </div>

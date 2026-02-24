@@ -5,36 +5,84 @@ import { Link } from 'react-router-dom';
 import { useTheme } from '../../context/ThemeContext';
 import { useMusic } from '../../context/MusicContext';
 
+import logoAnimado from '../../assets/logoanimado.mp4';
+import logoAnimadoOscuro from '../../assets/logoanimadooscuro.mp4';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
 const Navbar = () => {
+    const [loginClicks, setLoginClicks] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const { theme, toggleTheme } = useTheme();
     const { isMuted, toggleMute } = useMusic();
+    const [menuLabels, setMenuLabels] = useState({
+        home: 'Inicio',
+        about: 'Nosotros',
+        services: 'Servicios',
+        workshops: 'Talleres',
+        social: 'Labor Social',
+        events: 'Eventos',
+        contact: 'Reservar Cita'
+    });
 
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 20);
         };
         window.addEventListener('scroll', handleScroll);
+
+        const fetchMenuLabels = async () => {
+            try {
+                const res = await fetch(`${API_URL}/api/content/menu`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (Object.keys(data).length > 0) {
+                        setMenuLabels(prev => ({ ...prev, ...data }));
+                    }
+                }
+            } catch (error) {
+                console.log('Using default menu labels');
+            }
+        };
+
+        fetchMenuLabels();
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     const links = [
-        { name: 'Inicio', href: '#home' },
-        { name: 'Nosotros', href: '#about' },
-        { name: 'Servicios', href: '#services' },
-        { name: 'Talleres', href: '#workshops' },
-        { name: 'Responsabilidad Social', href: '#social-work' },
-        { name: 'Eventos', href: '#events' },
+        { name: menuLabels.home, href: '#home' },
+        { name: menuLabels.about, href: '#about' },
+        { name: menuLabels.services, href: '#services' },
+        { name: menuLabels.workshops, href: '#workshops' },
+        { name: menuLabels.social, href: '#social-work' },
+        { name: menuLabels.events, href: '#events' },
     ];
 
     return (
-        <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 py-4' : 'bg-transparent py-6'}`}>
+        <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 dark:bg-[color-mix(in_oklab,var(--color-slate-950)_95%,transparent)] backdrop-blur-md border-b border-slate-100 py-4' : 'bg-transparent dark:bg-[color-mix(in_oklab,var(--color-slate-950)_95%,transparent)] py-6'} dark:border-slate-800`}>
             <div className="container mx-auto px-6 flex justify-between items-center">
-                <a href="#" className="flex items-center gap-3 group">
-                    <img src="/logo.webp" alt="MenteOasis Logo" className="w-10 h-10 object-contain group-hover:scale-105 transition-transform duration-300" />
+                <div
+                    onClick={() => {
+                        const newClicks = loginClicks + 1;
+                        setLoginClicks(newClicks);
+                        if (newClicks >= 3) {
+                            window.location.href = '/login';
+                        }
+                        setTimeout(() => setLoginClicks(0), 2000);
+                    }}
+                    className="flex items-center gap-3 group cursor-pointer"
+                >
+                    <video
+                        src={theme === 'dark' ? logoAnimadoOscuro : logoAnimado}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-10 h-10 object-cover rounded-full group-hover:scale-105 transition-transform duration-300"
+                    />
                     <span className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">MenteOasis</span>
-                </a>
+                </div>
 
                 {/* Desktop Menu */}
                 <div className="hidden md:flex items-center gap-8">
@@ -65,21 +113,13 @@ const Navbar = () => {
                         >
                             {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
                         </button>
-                        {/* Login Button */}
-                        <Link
-                            to="/login"
-                            className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"
-                            title="Ingresar al sistema"
-                        >
-                            <LogIn size={20} />
-                        </Link>
                     </div>
 
                     <a
                         href="#contact"
                         className="px-6 py-2.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold uppercase tracking-wider rounded-full hover:bg-brand-600 dark:hover:bg-brand-300 transition-colors duration-300"
                     >
-                        Reservar Cita
+                        {menuLabels.contact}
                     </a>
                 </div>
 
@@ -127,21 +167,13 @@ const Navbar = () => {
                                     {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
                                     {isMuted ? 'Sonido' : 'Silencio'}
                                 </button>
-                                <Link
-                                    to="/login"
-                                    className="flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-400 ml-auto"
-                                    onClick={() => setIsOpen(false)}
-                                >
-                                    <LogIn size={20} />
-                                    Ingresar
-                                </Link>
                             </div>
                             <a
                                 href="#contact"
                                 className="w-full py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-center font-bold rounded-xl hover:bg-brand-600 dark:hover:bg-brand-400 transition-colors"
                                 onClick={() => setIsOpen(false)}
                             >
-                                Reservar Cita
+                                {menuLabels.contact}
                             </a>
                         </div>
                     </motion.div>
