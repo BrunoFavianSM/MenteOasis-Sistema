@@ -13,6 +13,10 @@ const ImageUpload = ({ onUploadSuccess, currentImage, label = "Imagen" }) => {
     const [editingImage, setEditingImage] = useState(null); // { src, name }
     const fileInputRef = useRef(null);
 
+    React.useEffect(() => {
+        setPreview(currentImage ? (currentImage.startsWith('http') ? currentImage : `${API_URL}${currentImage}`) : null);
+    }, [currentImage]);
+
     const handleFileChange = async (e) => {
         const file = e.target.files[0];
         if (!file) return;
@@ -52,8 +56,11 @@ const ImageUpload = ({ onUploadSuccess, currentImage, label = "Imagen" }) => {
         }
     };
 
-    const handleEditedSave = async (file, editedDataUrl) => {
-        setPreview(editedDataUrl);
+    const handleEditedSave = async (results) => {
+        if (!results || results.length === 0) return;
+        const { file, dataUrl } = results[0];
+
+        setPreview(dataUrl);
         setUploading(true);
         setError(null);
 

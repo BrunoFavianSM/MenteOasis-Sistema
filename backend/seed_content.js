@@ -118,95 +118,108 @@ const seedContent = async () => {
         console.log('✅ All tables created.');
 
         // ===== SEED: site_content =====
-        console.log('📝 Seeding site_content...');
-        const siteContent = [
-            // Hero
-            ['hero', 'badge_text', 'Tu bienestar es prioridad'],
-            ['hero', 'title_line1', 'Encuentra tu paz'],
-            ['hero', 'title_line2', 'interior hoy.'],
-            ['hero', 'subtitle', 'Espacio seguro para tu crecimiento emocional. Terapia profesional adaptada a tus necesidades en Talara.'],
-            ['hero', 'image_url', 'https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'],
-            ['hero', 'cta_primary_text', 'Ver Servicios'],
-            ['hero', 'cta_secondary_text', 'Contáctanos'],
+        console.log('📝 Checking site_content...');
+        const [existingContent] = await pool.execute('SELECT COUNT(*) as count FROM site_content');
 
-            // About
-            ['about', 'badge_text', 'Nuestra Esencia'],
-            ['about', 'title_line1', 'Un refugio para'],
-            ['about', 'title_line2', 'tu mente.'],
-            ['about', 'paragraph1', 'Somos un equipo de profesionales comprometidos con tu bienestar emocional, ofreciendo herramientas prácticas y apoyo profesional para superar los desafíos de la vida diaria.'],
-            ['about', 'paragraph2', 'Nuestro objetivo no es solo tratar síntomas, sino ayudarte a construir una vida plena y significativa a través del autoconocimiento.'],
-            ['about', 'image_url', 'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'],
-            ['about', 'benefit1', 'Profesionales licenciados y especializados'],
-            ['about', 'benefit2', 'Ambiente seguro y confidencial'],
-            ['about', 'benefit3', 'Enfoque integrador y personalizado'],
-            ['about', 'benefit4', 'Horarios flexibles y atención online'],
+        if (existingContent[0].count === 0) {
+            console.log('📝 Seeding site_content...');
+            const siteContent = [
+                // Hero
+                ['hero', 'badge_text', 'Tu bienestar es prioridad'],
+                ['hero', 'title_line1', 'Encuentra tu paz'],
+                ['hero', 'title_line2', 'interior hoy.'],
+                ['hero', 'subtitle', 'Espacio seguro para tu crecimiento emocional. Terapia profesional adaptada a tus necesidades en Talara.'],
+                ['hero', 'image_url', 'https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'],
+                ['hero', 'cta_primary_text', 'Ver Servicios'],
+                ['hero', 'cta_secondary_text', 'Contáctanos'],
 
-            // Contact
-            ['contact', 'phone', '+51 962268667'],
-            ['contact', 'email', 'psicoseverino@gmail.com'],
-            ['contact', 'address_line1', 'Av. E-9, Av. Mariscal Cáceres 43'],
-            ['contact', 'address_line2', 'Talara 20811, Perú'],
-            ['contact', 'whatsapp_number', '51962268667'],
-            ['contact', 'formspree_id', 'mykprrjn'],
-            ['contact', 'schedule_1_days', 'Lunes, Viernes y Sábado'],
-            ['contact', 'schedule_1_hours', '2:00 PM - 7:00 PM'],
-            ['contact', 'schedule_2_days', 'Martes, Miércoles y Jueves'],
-            ['contact', 'schedule_2_hours', '9:00 AM - 2:00 PM'],
-            ['contact', 'schedule_3_days', 'Domingos'],
-            ['contact', 'schedule_3_hours', 'Cerrado'],
+                // About
+                ['about', 'badge_text', 'Nuestra Esencia'],
+                ['about', 'title_line1', 'Un refugio para'],
+                ['about', 'title_line2', 'tu mente.'],
+                ['about', 'paragraph1', 'Somos un equipo de profesionales comprometidos con tu bienestar emocional, ofreciendo herramientas prácticas y apoyo profesional para superar los desafíos de la vida diaria.'],
+                ['about', 'paragraph2', 'Nuestro objetivo no es solo tratar síntomas, sino ayudarte a construir una vida plena y significativa a través del autoconocimiento.'],
+                ['about', 'image_url', 'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'],
+                ['about', 'benefit1', 'Profesionales licenciados y especializados'],
+                ['about', 'benefit2', 'Ambiente seguro y confidencial'],
+                ['about', 'benefit3', 'Enfoque integrador y personalizado'],
+                ['about', 'benefit4', 'Horarios flexibles y atención online'],
 
-            // Social links
-            ['social', 'facebook_url', 'https://www.facebook.com/MenteOasisPsicologiaPeru'],
-            ['social', 'instagram_url', 'https://www.instagram.com/menteoasis_psic/'],
-            ['social', 'tiktok_url', 'https://www.tiktok.com/@menteoasis'],
-            ['social', 'linktree_url', 'https://linktr.ee/psicoseverin'],
+                // Contact (Ubicación y Mapas + Contacto)
+                ['contact', 'contact_phone', '+51 962268667'],
+                ['contact', 'contact_email', 'psicoseverino@gmail.com'],
+                ['contact', 'contact_whatsapp', '51962268667'],
+                ['contact', 'contact_address_line1', 'Av. E-9, Av. Mariscal Cáceres 43'],
+                ['contact', 'contact_address_line2', 'Talara 20811, Perú'],
+                ['contact', 'schedule_group1_days', 'Lunes, Viernes y Sábado'],
+                ['contact', 'schedule_group1_hours', '2:00 PM - 7:00 PM'],
+                ['contact', 'schedule_group2_days', 'Martes, Miércoles y Jueves'],
+                ['contact', 'schedule_group2_hours', '9:00 AM - 2:00 PM'],
+                ['contact', 'schedule_closed_day', 'Domingos'],
+                ['contact', 'social_facebook', 'https://www.facebook.com/MenteOasisPsicologiaPeru'],
+                ['contact', 'social_instagram', 'https://www.instagram.com/menteoasis_psic/'],
+                ['contact', 'social_tiktok', 'https://www.tiktok.com/@menteoasis'],
 
-            // Location
-            ['location', 'location_address_line1', 'Av. E-9, Av. Mariscal Cáceres 43'],
-            ['location', 'location_address_line2', 'Talara 20811, Perú'],
-            ['location', 'location_maps_embed', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.0719242525065!2d-81.26827569999999!3d-4.5811073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x903645d0a064cb55%3A0xfb62cf4e9b7eae95!2sServicios%20psicol%C3%B3gicos%20Mente%20Oasis!5e0!3m2!1ses-419!2spe!4v1770138731367!5m2!1ses-419!2spe'],
-            ['location', 'location_maps_url', 'https://www.google.com/maps/dir//Servicios+psicol%C3%B3gicos+Mente+Oasis/@-4.5811073,-81.2682757,17z'],
+                // Location
+                ['location', 'location_address_line1', 'Av. E-9, Av. Mariscal Cáceres 43'],
+                ['location', 'location_address_line2', 'Talara 20811, Perú'],
+                ['location', 'location_maps_embed', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.0719242525065!2d-81.26827569999999!3d-4.5811073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x903645d0a064cb55%3A0xfb62cf4e9b7eae95!2sServicios%20psicol%C3%B3gicos%20Mente%20Oasis!5e0!3m2!1ses-419!2spe!4v1770138731367!5m2!1ses-419!2spe'],
+                ['location', 'location_maps_url', 'https://www.google.com/maps/dir//Servicios+psicol%C3%B3gicos+Mente+Oasis/@-4.5811073,-81.2682757,17z'],
 
-            // Footer
-            ['footer', 'description', 'Tu compañero en el camino hacia el bienestar mental y emocional. Profesionales comprometidos contigo.'],
+                // Footer
+                ['footer', 'description', 'Tu compañero en el camino hacia el bienestar mental y emocional. Profesionales comprometidos contigo.'],
+                ['footer', 'contact_phone', '+51 962268667'],
+                ['footer', 'contact_email', 'psicoseverino@gmail.com'],
+                ['footer', 'contact_address', 'Av. E-9, Av. Mariscal Cáceres 43, Talara 20811'],
+                ['footer', 'social_facebook', 'https://www.facebook.com/MenteOasisPsicologiaPeru'],
+                ['footer', 'social_instagram', 'https://www.instagram.com/menteoasis_psic/'],
+                ['footer', 'social_tiktok', 'https://www.tiktok.com/@menteoasis'],
+                ['footer', 'social_linktree', 'https://linktr.ee/psicoseverin'],
 
-            // Navigation Menu
-            ['menu', 'home', 'Inicio'],
-            ['menu', 'about', 'Nosotros'],
-            ['menu', 'services', 'Servicios'],
-            ['menu', 'workshops', 'Talleres'],
-            ['menu', 'events', 'Eventos'],
-            ['menu', 'social', 'Labor Social'],
-            ['menu', 'contact', 'Contacto'],
+                // Navigation Menu
+                ['menu', 'home', 'Inicio'],
+                ['menu', 'about', 'Nosotros'],
+                ['menu', 'services', 'Servicios'],
+                ['menu', 'workshops', 'Talleres'],
+                ['menu', 'events', 'Eventos'],
+                ['menu', 'social', 'Labor Social'],
+                ['menu', 'contact', 'Reserva una Cita'],
 
-            // Section Titles (sections_text)
-            ['sections_text', 'services_badge', 'Nuestros Servicios'],
-            ['sections_text', 'services_title', 'Soluciones profesionales'],
-            ['sections_text', 'services_subtitle', 'adaptadas a tu momento de vida.'],
-            ['sections_text', 'workshops_badge', 'Talleres y Programas'],
-            ['sections_text', 'workshops_title', 'Espacios de aprendizaje'],
-            ['sections_text', 'workshops_subtitle', 'Diseñados para potenciar tus habilidades y bienestar emocional.'],
-            ['sections_text', 'events_badge', 'Próximos Eventos'],
-            ['sections_text', 'events_title', 'Únete a nuestras'],
-            ['sections_text', 'events_subtitle', 'actividades y conferencias diseñadas para la comunidad.'],
-            ['sections_text', 'social_work_badge', 'Proyección Social'],
-            ['sections_text', 'social_work_title', 'Corazón en Acción'],
-            ['sections_text', 'social_work_subtitle', 'Nuestra labor fuera del consultorio para ayudar a quienes más lo necesitan.'],
-            ['sections_text', 'gallery_badge', 'Nuestra Galería'],
-            ['sections_text', 'gallery_title', 'Momentos MenteOasis'],
-            ['sections_text', 'gallery_subtitle', 'Un vistazo a nuestras instalaciones, talleres y eventos especiales.'],
-            ['sections_text', 'testimonials_badge', 'Testimonios'],
-            ['sections_text', 'testimonials_title', 'Lo que dicen'],
-            ['sections_text', 'testimonials_subtitle', 'nuestros pacientes sobre su proceso de transformación.'],
-        ];
+                // Section Titles (sections_text)
+                ['sections_text', 'services_badge', 'Nuestros Servicios'],
+                ['sections_text', 'services_title', 'Soluciones profesionales'],
+                ['sections_text', 'services_subtitle', 'adaptadas a tu momento de vida.'],
+                ['sections_text', 'workshops_badge', 'Talleres y Programas'],
+                ['sections_text', 'workshops_title', 'Espacios de aprendizaje'],
+                ['sections_text', 'workshops_subtitle', 'Diseñados para potenciar tus habilidades y bienestar emocional.'],
+                ['sections_text', 'events_badge', 'Próximos Eventos'],
+                ['sections_text', 'events_title', 'Únete a nuestras'],
+                ['sections_text', 'events_subtitle', 'actividades y conferencias diseñadas para la comunidad.'],
+                ['sections_text', 'social_work_badge', 'Proyección Social'],
+                ['sections_text', 'social_work_title', 'Corazón en Acción'],
+                ['sections_text', 'social_work_subtitle', 'Nuestra labor fuera del consultorio para ayudar a quienes más lo necesitan.'],
+                ['sections_text', 'gallery_badge', 'Nuestra Galería'],
+                ['sections_text', 'gallery_title', 'Momentos MenteOasis'],
+                ['sections_text', 'gallery_subtitle', 'Un vistazo a nuestras instalaciones, talleres y eventos especiales.'],
+                ['sections_text', 'testimonials_badge', 'Testimonios'],
+                ['sections_text', 'testimonials_title', 'Lo que dicen'],
+                ['sections_text', 'testimonials_subtitle', 'nuestros pacientes sobre su proceso de transformación.'],
 
-        for (const [section, key, value] of siteContent) {
-            await pool.execute(
-                'INSERT INTO site_content (section, content_key, content_value) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE content_value = VALUES(content_value)',
-                [section, key, value]
-            );
+                // Settings
+                ['settings', 'music_url', '/bucle.m4a'],
+                ['settings', 'music_enabled', 'true'],
+            ];
+
+            for (const [section, key, value] of siteContent) {
+                await pool.execute(
+                    'INSERT INTO site_content (section, content_key, content_value) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE content_value = VALUES(content_value)',
+                    [section, key, value]
+                );
+            }
+            console.log('✅ site_content seeded.');
+        } else {
+            console.log('⏭️ site_content already has data. Skipping seed.');
         }
-        console.log('✅ site_content seeded.');
 
         // ===== SEED: hero_phrases =====
         console.log('📝 Seeding hero_phrases...');

@@ -3,10 +3,11 @@ import {
     Save, RefreshCw, AlertCircle, CheckCircle,
     Layout, Info, Heart, BookOpen, Calendar,
     Users, Image as ImageIcon, MessageSquare,
-    Phone, MapPin, Globe, ChevronRight
+    Phone, MapPin, Globe, ChevronRight, Volume2
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import ImageUpload from './ImageUpload';
+import AudioUpload from './AudioUpload';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
@@ -129,6 +130,16 @@ const SECTIONS = [
             social_instagram: 'URL Instagram',
             social_tiktok: 'URL TikTok',
             social_linktree: 'URL Linktree'
+        }
+    },
+    {
+        id: 'settings',
+        title: 'Configuración y Música',
+        icon: Volume2,
+        keys: ['music_url', 'music_enabled'],
+        labels: {
+            music_url: 'Música de Fondo (Ambiental)',
+            music_enabled: 'Música Activada (true/false)'
         }
     }
 ];
@@ -276,7 +287,7 @@ const AdminSiteContent = () => {
                         const isLongText = key.includes('paragraph') || key.includes('subtitle') || key.includes('description') || key.includes('embed') || key.includes('benefit');
 
                         return (
-                            <div key={key} className={`group ${isLongText ? 'md:col-span-2 lg:col-span-3' : ''}`}>
+                            <div key={`${activeTab}-${key}`} className={`group ${isLongText ? 'md:col-span-2 lg:col-span-3' : ''}`}>
                                 <div className="flex items-center justify-between mb-4 px-1">
                                     <label className="text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em]">
                                         {currentSection.labels?.[key] || key.replace(/_/g, ' ')}
@@ -292,6 +303,14 @@ const AdminSiteContent = () => {
                                             onUploadSuccess={(url) => handleChange(key, url)}
                                         />
                                     </div>
+                                ) : key === 'music_url' ? (
+                                    <div className="bg-slate-50 dark:bg-slate-800/40 p-8 rounded-[2.5rem] border border-slate-200/50 dark:border-slate-800 focus-within:ring-4 focus-within:ring-brand-500/10 transition-all">
+                                        <AudioUpload
+                                            label={currentSection.labels?.[key]}
+                                            currentAudio={content[activeTab]?.[key] || ''}
+                                            onUploadSuccess={(url) => handleChange(key, url)}
+                                        />
+                                    </div>
                                 ) : isLongText ? (
                                     <textarea
                                         rows={key.includes('paragraph') ? 6 : (key.includes('benefit') ? 2 : 3)}
@@ -300,6 +319,20 @@ const AdminSiteContent = () => {
                                         className="w-full px-8 py-6 rounded-[2rem] border-2 border-slate-100 dark:border-slate-800 dark:bg-slate-900/60 dark:text-white focus:border-brand-500 focus:bg-white dark:focus:bg-slate-900 outline-none transition font-medium text-lg leading-relaxed text-slate-700 shadow-sm"
                                         placeholder={`Escribe aquí el contenido para "${currentSection.labels?.[key]}"...`}
                                     />
+                                ) : key === 'music_enabled' ? (
+                                    <div className="flex items-center gap-4 bg-slate-50 dark:bg-slate-800/40 p-6 rounded-[1.5rem] border-2 border-slate-100 dark:border-slate-800">
+                                        <button
+                                            onClick={() => handleChange(key, content[activeTab]?.[key] === 'true' ? 'false' : 'true')}
+                                            className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none ${content[activeTab]?.[key] === 'true' ? 'bg-brand-600' : 'bg-slate-300 dark:bg-slate-600'}`}
+                                        >
+                                            <span
+                                                className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform ${content[activeTab]?.[key] === 'true' ? 'translate-x-7' : 'translate-x-1'}`}
+                                            />
+                                        </button>
+                                        <span className="font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider text-sm">
+                                            {content[activeTab]?.[key] === 'true' ? 'ACTIVADO' : 'DESACTIVADO'}
+                                        </span>
+                                    </div>
                                 ) : (
                                     <div className="relative">
                                         <input

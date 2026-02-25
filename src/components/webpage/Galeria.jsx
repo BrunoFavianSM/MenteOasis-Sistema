@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
@@ -19,6 +18,14 @@ const Galeria = () => {
         subtitle: ''
     });
 
+    const containerRef = useRef(null);
+    const xRef = useRef(0);
+    const isDraggingRef = useRef(false);
+    const isPausedRef = useRef(false);
+    const lastClientXRef = useRef(0);
+    const rafId = useRef(null);
+    const lastTimeRef = useRef(performance.now());
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -28,21 +35,90 @@ const Galeria = () => {
                     if (data.length > 0) setImages(data.map(img => img.image_url));
                 }
 
-                // Fetch section header texts
                 const resHeader = await fetch(`${API_URL}/api/content/gallery`);
                 if (resHeader.ok) {
                     const headerData = await resHeader.json();
-                    setHeader({
-                        badge: headerData.badge || header.badge,
-                        title: headerData.title || header.title,
-                        subtitle: headerData.subtitle || header.subtitle
-                    });
+                    setHeader(prev => ({
+                        badge: headerData.badge || prev.badge,
+                        title: headerData.title || prev.title,
+                        subtitle: headerData.subtitle || prev.subtitle
+                    }));
                 }
             } catch (error) {
                 console.log('Using fallback gallery data');
             }
         };
         fetchData();
+    }, []);
+
+    // Animation Loop — runs continuously via requestAnimationFrame
+    useEffect(() => {
+        const animate = (time) => {
+            if (!isDraggingRef.current && !isPausedRef.current && containerRef.current) {
+                const deltaTime = time - lastTimeRef.current;
+                const speed = 0.05; // px per ms
+                xRef.current -= speed * deltaTime;
+
+                const halfWidth = containerRef.current.scrollWidth / 2;
+                if (Math.abs(halfWidth) > 0) {
+                    if (xRef.current <= -halfWidth) {
+                        xRef.current += halfWidth;
+                    } else if (xRef.current > 0) {
+                        xRef.current -= halfWidth;
+                    }
+                }
+
+                containerRef.current.style.transform = `translateX(${xRef.current}px)`;
+            }
+            lastTimeRef.current = time;
+            rafId.current = requestAnimationFrame(animate);
+        };
+
+        rafId.current = requestAnimationFrame(animate);
+        return () => {
+            if (rafId.current) cancelAnimationFrame(rafId.current);
+        };
+    }, []);
+
+    // --- Mouse/Touch Drag Handlers (no framer-motion) ---
+    const handlePointerDown = useCallback((e) => {
+        isDraggingRef.current = true;
+        lastClientXRef.current = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        // Prevent text selection while dragging
+        e.preventDefault();
+    }, []);
+
+    const handlePointerMove = useCallback((e) => {
+        if (!isDraggingRef.current || !containerRef.current) return;
+        const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        const delta = clientX - lastClientXRef.current;
+        lastClientXRef.current = clientX;
+
+        xRef.current += delta;
+
+        const halfWidth = containerRef.current.scrollWidth / 2;
+        if (Math.abs(halfWidth) > 0) {
+            if (xRef.current <= -halfWidth) {
+                xRef.current += halfWidth;
+            } else if (xRef.current > 0) {
+                xRef.current -= halfWidth;
+            }
+        }
+
+        containerRef.current.style.transform = `translateX(${xRef.current}px)`;
+    }, []);
+
+    const handlePointerUp = useCallback(() => {
+        isDraggingRef.current = false;
+    }, []);
+
+    const handleMouseEnter = useCallback(() => {
+        isPausedRef.current = true;
+    }, []);
+
+    const handleMouseLeave = useCallback(() => {
+        isPausedRef.current = false;
+        isDraggingRef.current = false;
     }, []);
 
     // Duplicate images for infinite scroll effect
@@ -69,25 +145,22 @@ const Galeria = () => {
                 </div>
             </div>
 
-            <div className="relative w-full overflow-hidden group cursor-grab active:cursor-grabbing">
+            <div className="relative w-full overflow-hidden group">
                 {/* Subtle Gradient Masks */}
                 <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white dark:from-slate-950 to-transparent z-10 pointer-events-none" />
                 <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white dark:from-slate-950 to-transparent z-10 pointer-events-none" />
 
-                <motion.div
-                    className="flex gap-8 w-max"
-                    animate={{ x: ['0%', '-50%'] }}
-                    transition={{
-                        x: {
-                            repeat: Infinity,
-                            repeatType: 'loop',
-                            duration: 40,
-                            ease: 'linear',
-                        },
-                    }}
-                    whileHover={{ transition: { duration: 1000 } }} // Slows down significantly on hover (effectively pausing)
-                    drag="x"
-                    dragConstraints={{ left: -1000, right: 1000 }} // Allow some manual play
+                <div
+                    ref={containerRef}
+                    className="flex gap-8 w-max cursor-grab active:cursor-grabbing select-none"
+                    onMouseDown={handlePointerDown}
+                    onMouseMove={handlePointerMove}
+                    onMouseUp={handlePointerUp}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    onTouchStart={handlePointerDown}
+                    onTouchMove={handlePointerMove}
+                    onTouchEnd={handlePointerUp}
                 >
                     {duplicatedImages.map((img, index) => (
                         <div
@@ -98,10 +171,11 @@ const Galeria = () => {
                                 src={img.startsWith('http') ? img : `${API_URL}${img}`}
                                 alt={`Galería ${index + 1}`}
                                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500 pointer-events-none"
+                                draggable={false}
                             />
                         </div>
                     ))}
-                </motion.div>
+                </div>
             </div>
         </section>
     );

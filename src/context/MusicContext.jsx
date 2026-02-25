@@ -10,37 +10,54 @@ export const useMusic = () => {
     return context;
 };
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
 export const MusicProvider = ({ children }) => {
     const audioRef = useRef(null);
     const [isMuted, setIsMuted] = useState(() => {
-        // Get mute preference from localStorage
         const saved = localStorage.getItem('musicMuted');
         return saved === 'true';
     });
     const [isPlaying, setIsPlaying] = useState(false);
 
     useEffect(() => {
-        // Create audio element
-        audioRef.current = new Audio('/bucle.m4a');
-        audioRef.current.loop = true;
-        audioRef.current.volume = 0.3; // Set volume to 30% for ambient music
-
-        // Try to play music automatically
-        const playMusic = async () => {
+        const fetchSettings = async () => {
             try {
-                if (!isMuted) {
-                    await audioRef.current.play();
-                    setIsPlaying(true);
+                const res = await fetch(`${API_URL}/api/content/settings`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.music_url) {
+                        const url = data.music_url.startsWith('http') ? data.music_url : `${API_URL}${data.music_url}`;
+
+                        if (!audioRef.current) {
+                            audioRef.current = new Audio(url);
+                            audioRef.current.loop = true;
+                            audioRef.current.volume = 0.3;
+                        } else {
+                            audioRef.current.src = url;
+                        }
+
+                        if (!isMuted) {
+                            audioRef.current.play().then(() => {
+                                setIsPlaying(true);
+                            }).catch(error => {
+                                console.log('Autoplay blocked, waiting for user interaction');
+                            });
+                        }
+                    }
                 }
             } catch (error) {
-                // Autoplay might be blocked by browser, user will need to interact first
-                console.log('Autoplay blocked, waiting for user interaction');
+                console.log('Using fallback music');
+                if (!audioRef.current) {
+                    audioRef.current = new Audio('/bucle.m4a');
+                    audioRef.current.loop = true;
+                    audioRef.current.volume = 0.3;
+                }
             }
         };
 
-        playMusic();
+        fetchSettings();
 
-        // Cleanup
         return () => {
             if (audioRef.current) {
                 audioRef.current.pause();

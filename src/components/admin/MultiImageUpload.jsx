@@ -73,7 +73,10 @@ const MultiImageUpload = ({ onUploadSuccess, category = "General", standalone = 
         setFilesToUpload(newFiles);
     };
 
-    const handleEditSave = (editedFile, editedDataUrl) => {
+    const handleEditSave = (results) => {
+        if (!results || results.length === 0) return;
+        const { file: editedFile, dataUrl: editedDataUrl } = results[0];
+
         if (!editingImage) return;
 
         const { index } = editingImage;

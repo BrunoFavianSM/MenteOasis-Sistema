@@ -48,6 +48,19 @@ const upload = multer({
     }
 });
 
+const audioUpload = multer({
+    storage,
+    limits: { fileSize: 15 * 1024 * 1024 }, // 15MB limit
+    fileFilter: (req, file, cb) => {
+        const allowedTypes = ['audio/mpeg', 'audio/wav', 'audio/x-m4a', 'audio/mp4', 'audio/aac', 'audio/ogg'];
+        if (allowedTypes.includes(file.mimetype)) {
+            cb(null, true);
+        } else {
+            cb(new Error('Solo se permiten archivos de audio (MP3, WAV, M4A, AAC, OGG)'), false);
+        }
+    }
+});
+
 // =====================================================
 // AUTH MIDDLEWARE
 // =====================================================
@@ -407,6 +420,31 @@ app.delete('/api/admin/events/:id', authMiddleware, async (req, res) => {
         res.json({ message: 'Evento eliminado' });
     } catch (error) {
         res.status(500).json({ message: 'Error al eliminar evento' });
+    }
+});
+
+// =====================================================
+// AUDIO UPLOAD ROUTE
+// =====================================================
+app.post('/api/admin/upload-audio', authMiddleware, audioUpload.single('audio'), async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ message: 'No se subió ningún archivo' });
+        }
+
+        const ext = req.file.originalname.substring(req.file.originalname.lastIndexOf('.'));
+        const fileName = `music_${Date.now()}${ext}`;
+        const filePath = join(uploadsDir, fileName);
+
+        fs.writeFileSync(filePath, req.file.buffer);
+
+        res.json({
+            message: 'Audio subido con éxito',
+            url: `/uploads/${fileName}`
+        });
+    } catch (error) {
+        console.error('Error uploading audio:', error);
+        res.status(500).json({ message: 'Error al procesar el audio' });
     }
 });
 
